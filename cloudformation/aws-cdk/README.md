@@ -1,0 +1,77 @@
+# iac-tools
+
+Infrastructure as Code tool samples with some focus on deployment of Cloudfront, Lambda@edge functions, Route53, ACM, S3 and DynamoDB AWS services.
+
+## Techradar
+
+Thoughtworks technology radar tags Handwritten Cloudformation descriptors with HOLD: https://www.thoughtworks.com/radar/tools/handwritten-cloudformation
+
+Reasons can be acceded, let's use regular programming languages and test suites to produce Cloudformation stacks for deploying AWS infrastructure.
+
+One proposal is to use the original [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) for Cloudformation Template production in order not to immediately adopt new high level frameworks like [troposphere](https://www.thoughtworks.com/radar/languages-and-frameworks/troposphere) (Thoughtworks ASSESS) or [Pulumi](https://www.thoughtworks.com/radar/platforms/pulumi) (Thoughtworks ASSESS).
+
+
+## AWS CDK
+
+The AWS Cloud Development Kit is developed in Typescript which is transpiled to JavaScript. 
+
+There are Bindings for other programming languages to produce Cloudformation deployments: https://docs.aws.amazon.com/de_de/cdk/latest/guide/getting_started.html
+
+Starter recommendation: [CDK Workshop](https://cdkworkshop.com/)
+
+### AWS CDK CLI Setup
+
+brew install aws-cdk
+
+npm i aws-cdk
+
+cdk init sample-app --language=javascript
+
+### References
+
+- https://github.com/aws/aws-cdk
+- https://docs.aws.amazon.com/de_de/cli/latest/userguide/install-bundle.html
+- https://cdkworkshop.com/
+- https://aws.amazon.com/de/blogs/developer/serverless-data-engineering-at-zalando-with-the-aws-cdk/
+
+
+### SimpleStack Demo
+
+First of all: have an AWS account, aws-cli and configure your local system appropriately (aws configure).
+
+Switch your NVM environment to Node.js v10.16.3 (LTS: Dubnium).
+
+Switch to the aws-cdk-simplestack directory
+
+npm install
+
+#### Run unit tests with Jest
+
+npm run test
+
+#### Produce a Cloudformation Template
+
+cdk synth --profile your-profile
+
+(use --json to produce this in json instead of yaml)
+
+This may be useful for manual deployment, version comparison, review/testing and transformation purposes.
+
+#### Deploy the stack directly
+
+cdk deploy --profile your-profile
+
+#### Destroy the stack directly
+
+cdk destroy --profile your-profile
+
+#### Calculate a difference to a deployed stack
+
+cdk diff --profile your-profile
+
+
+### Lambda Cron Demo
+
+Follow the instructions before.
+
+Be aware that you need createRole and passRole right to produce this stack
