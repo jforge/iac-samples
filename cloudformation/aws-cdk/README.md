@@ -75,3 +75,21 @@ cdk diff --profile your-profile
 Follow the instructions before.
 
 Be aware that you need createRole and passRole right to produce this stack
+
+### S3 Vue.js Demo
+
+See above.
+
+
+### DynamDB Demo
+
+See above.
+
+
+### Route 53 with Cloudformation Demo
+
+See above
+
+This is based on [a forestry article](https://forestry.io/blog/adding-dns-and-edge-functions-to-our-cloudformation-stack/)
+
+
