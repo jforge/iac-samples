@@ -86,9 +86,9 @@ See above.
 See above.
 
 
-### Route 53 with Cloudformation Demo
+### Route 53 with Cloudfront Demo
 
-See above
+See above.
 
 This is based on [a forestry article](https://forestry.io/blog/adding-dns-and-edge-functions-to-our-cloudformation-stack/)
 

@@ -1,0 +1,49 @@
+[
+{
+    "host": "www.immowelt.de",
+    "uri": "/merkzettel",
+    "redirects" : [
+        {
+            "trigger": "default",
+            "setURI": "/index.html",
+            "setOrigin": "https://merkzettel.immowelt.de",
+            "setHeaders": [
+                { "referrer-policy": "same-origin" },
+                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+            ]
+        },
+        {
+            "trigger": "authToken.invalid",
+            "setURI": "https://signin.immowelt.de/?target=objectmemo",
+            "setOrigin": "",
+            "setHeaders": [
+                { "referrer-policy": "same-origin" },
+                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+            ]
+        }
+    ]
+},
+{
+    "host": "www.immowelt.de",
+    "uri": "/bewerbermappe",
+    "redirects" : [
+        {
+            "trigger": "default",
+            "setURI": "/index.html",
+            "setOrigin": "https://bewerbermappe.immowelt.de",
+            "setHeaders": [
+                { "referrer-policy": "same-origin" },
+                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+            ]
+        },
+        {
+            "trigger": "authToken.invalid",
+            "setURI": "https://signin.immowelt.de/?target=applicantportfolio",
+            "setOrigin": "",
+            "setHeaders": [
+                { "referrer-policy": "same-origin" },
+                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+            ]
+        }
+    ]
+}]

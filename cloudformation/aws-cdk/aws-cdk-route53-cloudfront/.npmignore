@@ -1,7 +1,5 @@
-.DS_Store
-.vscode
-.idea
-node_modules
+*.ts
+!*.d.ts
 
 # CDK asset staging directory
 .cdk.staging
