@@ -1,0 +1,3 @@
+aws:
+  region: eu-central-1
+  tableName: CUSTOMER_LIST

@@ -1,0 +1,10 @@
+{
+  "CUSTOMER_LIST": {
+    "Keys": [
+      { 
+        "CUSTOMER_ID": { "N": "001" }
+      }
+    ],
+    "ProjectionExpression":"CUSTOMER_ID"
+  }
+}
