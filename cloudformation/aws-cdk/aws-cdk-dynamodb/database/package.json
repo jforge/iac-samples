@@ -1,0 +1,19 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "DynamoDB setup and review routines",
+  "main": "scantable.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.554.0",
+    "js-yaml": "^3.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jforge/iac-samples.git"
+  }
+}
