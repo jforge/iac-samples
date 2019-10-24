@@ -1,12 +1,12 @@
 [
 {
-    "host": "www.immowelt.de",
-    "uri": "/merkzettel",
+    "host": "www.things.codes",
+    "uri": "/api",
     "redirects" : [
         {
             "trigger": "default",
             "setURI": "/index.html",
-            "setOrigin": "https://merkzettel.immowelt.de",
+            "setOrigin": "https://api.things.codes",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
                 { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
@@ -14,7 +14,7 @@
         },
         {
             "trigger": "authToken.invalid",
-            "setURI": "https://signin.immowelt.de/?target=objectmemo",
+            "setURI": "https://signin.things.codes/?target=api",
             "setOrigin": "",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
@@ -24,13 +24,13 @@
     ]
 },
 {
-    "host": "www.immowelt.de",
-    "uri": "/bewerbermappe",
+    "host": "www.things.codes",
+    "uri": "/demo",
     "redirects" : [
         {
             "trigger": "default",
             "setURI": "/index.html",
-            "setOrigin": "https://bewerbermappe.immowelt.de",
+            "setOrigin": "https://demo.things.codes",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
                 { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
@@ -38,7 +38,7 @@
         },
         {
             "trigger": "authToken.invalid",
-            "setURI": "https://signin.immowelt.de/?target=applicantportfolio",
+            "setURI": "https://signin.things.codes/?target=demo",
             "setOrigin": "",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
