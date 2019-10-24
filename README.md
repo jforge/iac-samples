@@ -26,7 +26,7 @@ This is the "official" Amazon way to use modern programming languages for conven
 It has a developer friendly CLI and comes with support for several programming languages: 
 By default TypeScript resp. JavaScript, Python, Java, .NET/C#.
 
-To get familiar with it, visit the [CDK Worshop](https://cdkworkshop.com/) for Typescript or Python-based introduction.
+To get familiar with it, visit the [CDK Workshop](https://cdkworkshop.com/) for Typescript or Python-based introduction.
 
 With a clear demand for using AWS this may be a preferred way to work with IaC.
 
@@ -93,12 +93,11 @@ See [Github](https://github.com/pulumi/) to get started.
 
 ### More on IaC
 
-A (non-curated) list of classic Infrastructure as Code tools and discussion about IaC can be found here: https://www.thorntech.com/2018/04/15-infrastructure-as-code-tools/.
+A (non-curated) list of classic Infrastructure as Code tools and discussion about IaC can be found in a [Thorntech article](https://www.thorntech.com/2018/04/15-infrastructure-as-code-tools/).
 
-Another approach and alternative platform is [Cloudfoundry](https://www.cloudfoundry.org/) ([Node.js Sample](https://github.com/cloudfoundry-samples/cf-sample-app-nodejs):
+Another approach and alternative platform is [Cloudfoundry](https://www.cloudfoundry.org/) ([Node.js Sample](https://github.com/cloudfoundry-samples/cf-sample-app-nodejs)):
 
 > Cloud Foundry is an open source, multi-cloud application platform as a service governed by the Cloud Foundry Foundation.
-
 
 Also see [More cloud tools and helpers](https://github.com/cloudtools).
 
