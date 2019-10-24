@@ -15,4 +15,4 @@ cdk init app --language=typescript
 
 ## References
 
-[DynamoDB CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/typescript/api/aws-dynamodb.html)
+[DynamoDB CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-dynamodb-readme.html)
