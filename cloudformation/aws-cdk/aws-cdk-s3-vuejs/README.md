@@ -1,6 +1,8 @@
-# Deploying A Vue.js frontend to S3
+# Deploying a Vue.js frontend to S3
 
 Demonstrates provisioning of a Vue.js SPA to S3.
+
+Work in progress.
 
 ## References
 
