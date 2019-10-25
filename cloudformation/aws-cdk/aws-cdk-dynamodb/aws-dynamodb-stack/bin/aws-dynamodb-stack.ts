@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
-import { AwsDynamodbStackStack } from '../lib/aws-dynamodb-stack-stack';
+import { AwsDynamodbStack } from '../lib/aws-dynamodb-stack';
 
 const app = new cdk.App();
-new AwsDynamodbStackStack(app, 'AwsDynamodbStackStack');
+new AwsDynamodbStack(app, 'AwsDynamodbStack');
