@@ -1,23 +1,19 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+
+const resourceBuilder = require('./aws_resource_builder.js');
 const configuration = require('./configuration.js');
-
 const config = configuration.load();
-console.log(config);
 
-AWS.config.update({ region: config.aws.region });
-
-// Create the DynamoDB service object
-var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+var dynamodb = resourceBuilder.buildDynamoDbResource();
 
 var params = {
   //TableName: process.argv[2]
-  TableName: config.aws.tableName
+  TableName: config.aws.dynamodb.tableName
 };
 
 // Call DynamoDB to retrieve the selected table descriptions
-ddb.describeTable(params, function(err, data) {
+dynamodb.describeTable(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {

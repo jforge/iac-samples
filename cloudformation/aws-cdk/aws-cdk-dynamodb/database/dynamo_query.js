@@ -1,31 +1,33 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const resourceBuilder = require('./aws_resource_builder.js');
 const configuration = require('./configuration.js');
-
 const config = configuration.load();
-console.log(config);
 
-AWS.config.update({ region: config.aws.region });
-
-// Create DynamoDB document client
-var docClient = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
+var dynamodb = resourceBuilder.buildDynamoDbDocumentClientResource();
 
 var params = {
+  TableName: config.aws.dynamodb.tableName,
+  KeyConditionExpression: '#host = :host and begins_with (#uri, :uri)',
+  FilterExpression: 'contains (#redirects, :origin)',
+  ExpressionAttributeNames: {
+    '#host': 'host',
+    '#uri': 'uri',
+    '#redirects': 'redirects'
+  },
   ExpressionAttributeValues: {
-    ':i': 3,
-    ':name': 'F',
-    ':notes': 'bout'
-   },
- KeyConditionExpression: 'CUSTOMER_ID = :i and begins_with (CUSTOMER_NAME, :name)',
- FilterExpression: 'contains (CUSTOMER_NOTES, :notes)',
- TableName: config.aws.tableName
+    ':host': 'www.things.codes',
+    ':uri': '/api',
+    ':origin': { 
+      "setURI":"/index.html", 
+      "setOrigin":"https://api.things.codes" 
+    }
+  }
 };
-
-docClient.query(params, function(err, data) {
+dynamodb.query(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {
-    console.log("Success", data.Items);
+    console.log("Success", JSON.stringify(data.Items));
   }
 });

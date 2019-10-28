@@ -1,26 +1,37 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const resourceBuilder = require('./aws_resource_builder.js');
 const configuration = require('./configuration.js');
-
 const config = configuration.load();
-console.log(config);
 
-AWS.config.update({ region: config.aws.region });
-
-// Create the DynamoDB service object
-var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+var dynamodb = resourceBuilder.buildDynamoDbResource();
 
 var params = {
-  TableName: config.aws.tableName,
+  TableName: config.aws.dynamodb.tableName,
   Item: {
-    'CUSTOMER_ID' : {N: '001'},
-    'CUSTOMER_NAME' : {S: 'John Doe'}
+    'host' : {S: 'www.things.codes'},
+    'uri' : {S: '/demo'},
+    'redirects' : {L : [
+        {
+          "M": {
+            "setURI": {
+              "S": "/index.html"
+            },
+            "setOrigin": {
+              "S": "https://demo.things.codes"
+            },
+            "trigger": {
+              "S": "default"
+            }
+          }
+        }
+      ]
+    }
   }
 };
 
 // Call DynamoDB to add the item to the table
-ddb.putItem(params, function(err, data) {
+dynamodb.putItem(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {

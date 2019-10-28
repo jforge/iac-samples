@@ -1,35 +1,31 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const resourceBuilder = require('./aws_resource_builder.js');
 const configuration = require('./configuration.js');
-
 const config = configuration.load();
-console.log(config);
 
-AWS.config.update({ region: config.aws.region });
-
-// Create DynamoDB service object
-var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+var dynamodb = resourceBuilder.buildDynamoDbResource();
 
 var params = {
   RequestItems: {
-    [config.aws.tableName] : {
+    [config.aws.dynamodb.tableName] : {
       Keys: [
         {
-          'CUSTOMER_ID': { 'N': '1' },
-          'CUSTOMER_NAME': { 'S': 'John Doe' }
+          'host': { 'S': 'www.things.codes' },
+          'uri': { 'S': '/api' }
         }
       ],
-      'ProjectionExpression': 'CUSTOMER_NAME'
+      'ProjectionExpression': 'uri'
     }
   }
 };
 
-ddb.batchGetItem(params, function(err, data) {
+dynamodb.batchGetItem(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {
-    data.Responses.CUSTOMER_LIST.forEach(function(element, index, array) {
+    console.log(JSON.stringify(data.Responses));
+    data.Responses[config.aws.dynamodb.tableName].forEach(function(element, index, array) {
       console.log(element);
     });
   }

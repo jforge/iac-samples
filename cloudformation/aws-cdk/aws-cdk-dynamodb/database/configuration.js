@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const util = require('util');
 const yaml = require('js-yaml');
+const AWS = require('aws-sdk');
 
 const configuration = {
     load: function () { 
@@ -18,6 +19,13 @@ const configuration = {
             return data;
         } catch (err) {
             console.log(err.stack || String(err));
+        }
+    },
+
+    configureResourceEndpoint: function (awsResource, useLocalEndpoint) {
+        if (useLocalEndpoint === true) {
+            console.log('using local ' + awsResource);
+            awsResource.endpoint =  new AWS.Endpoint('http://localhost:8000');
         }
     }
 }

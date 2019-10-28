@@ -1,0 +1,24 @@
+{
+    "host": "www.things.codes",
+    "uri": "/api",
+    "redirects" : [
+        {
+            "trigger": "default",
+            "setURI": "/index.html",
+            "setOrigin": "https://api.things.codes",
+            "setHeaders": [
+                { "referrer-policy": "same-origin" },
+                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+            ]
+        },
+        {
+            "trigger": "authToken.invalid",
+            "setURI": "https://signin.things.codes/?target=api",
+            "setOrigin": "",
+            "setHeaders": [
+                { "referrer-policy": "same-origin" },
+                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+            ]
+        }
+    ]
+}

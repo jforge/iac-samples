@@ -1,10 +1,10 @@
 {
-  "CUSTOMER_LIST": {
+  "Routing-Rules": {
     "Keys": [
       { 
-        "CUSTOMER_ID": { "N": "001" }
+        "host": { "S": "www.things.codes" }
       }
     ],
-    "ProjectionExpression":"CUSTOMER_ID"
+    "ProjectionExpression": "host"
   }
 }

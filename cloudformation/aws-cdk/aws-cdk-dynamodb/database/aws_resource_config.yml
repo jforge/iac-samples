@@ -1,3 +1,9 @@
 aws:
   region: eu-central-1
-  tableName: CUSTOMER_LIST
+  dynamodb:
+    tableName: Routing-Rules
+    billingMode: PAY_PER_REQUEST
+useLocalEndpoint: false
+local:
+  url: http://localhost:8000
+ 

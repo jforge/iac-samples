@@ -1,25 +1,20 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const resourceBuilder = require('./aws_resource_builder.js');
 const configuration = require('./configuration.js');
-
 const config = configuration.load();
-console.log(config);
 
-AWS.config.update({ region: config.aws.region });
-
-// Create DynamoDB document client
-var docClient = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
+var dynamodb = resourceBuilder.buildDynamoDbDocumentClientResource();
 
 var params = {
-  TableName: config.aws.tableName,
+  TableName: config.aws.dynamodb.tableName,
   Key : { 
-    'CUSTOMER_ID': 1, 
-    'CUSTOMER_NAME': 'John Doe' 
+    'host': 'www.things.codes', 
+    'uri': '/api' 
   }
 } 
 
-docClient.get(params, function(err, data) {
+dynamodb.get(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {

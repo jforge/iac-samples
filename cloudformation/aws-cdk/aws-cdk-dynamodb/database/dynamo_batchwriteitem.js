@@ -1,34 +1,29 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const resourceBuilder = require('./aws_resource_builder.js');
 const configuration = require('./configuration.js');
-
 const config = configuration.load();
-console.log(config);
 
-AWS.config.update({ region: config.aws.region });
-
-// Create DynamoDB service object
-var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+var dynamodb = resourceBuilder.buildDynamoDbResource();
 
 var params = {
   RequestItems: {
-    [config.aws.tableName]: [
+    [config.aws.dynamodb.tableName]: [
        {
          PutRequest: {
            Item: {
-             "CUSTOMER_ID": { "N": "002" },
-               "CUSTOMER_NAME": { "S": "Richard Roe" },
-               "CUSTOMER_NOTES": { "S": "Notes about customer" }
+            "host": { "S": "www.things.codes" },
+            "uri": { "S": "/api" },
+            "redirects": { "S": "{ 'uri': 'api' }" }
            }
          }
        },
        {
          PutRequest: {
            Item: {
-             "CUSTOMER_ID": { "N": "003" },
-              "CUSTOMER_NAME": { "S": "Freddy Foe" },
-              "CUSTOMER_NOTES": { "S": "Notes about customer" }
+            "host": { "S": "www.things.codes" },
+            "uri": { "S": "/demo" },
+            "redirects": { "S": "{ 'uri': 'demo' }" }
            }
          }
        }
@@ -36,7 +31,7 @@ var params = {
   }
 };
 
-ddb.batchWriteItem(params, function(err, data) {
+dynamodb.batchWriteItem(params, function(err, data) {
   if (err) {
     console.log("Error", err);
   } else {
