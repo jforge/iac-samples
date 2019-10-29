@@ -8,23 +8,16 @@ var dynamodb = resourceBuilder.buildDynamoDbDocumentClientResource();
 
 var params = {
   TableName: config.aws.dynamodb.tableName,
-  KeyConditionExpression: '#host = :host and begins_with (#uri, :uri)',
-  FilterExpression: 'contains (#redirects, :origin)',
-  ExpressionAttributeNames: {
-    '#host': 'host',
-    '#uri': 'uri',
-    '#redirects': 'redirects'
-  },
+  KeyConditionExpression: 'host = :host and begins_with (uri, :uri)',
+  FilterExpression: 'contains (redirects[0].setOrigin, :origin)',
   ExpressionAttributeValues: {
     ':host': 'www.things.codes',
-    ':uri': '/api',
-    ':origin': { 
-      "setURI":"/index.html", 
-      "setOrigin":"https://api.things.codes" 
-    }
+    ':uri': '/d',
+    ':origin': '.things.codes'
   }
 };
-dynamodb.query(params, function(err, data) {
+
+dynamodb.query(params, function (err, data) {
   if (err) {
     console.log("Error", err);
   } else {
