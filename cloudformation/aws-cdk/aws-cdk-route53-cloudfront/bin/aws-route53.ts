@@ -17,7 +17,7 @@ const target = new BucketStack(app, 'BucketStack', { env: envEU });
 // create zone/recordset with alias to bucket resource
 const primaryZoneName = "lab.00x.de";
 
-new Route53StackNewHostedZone(app, 'AwsRoute53StackNewHostedZone',
+new Route53StackNewHostedZone(app, 'Route53StackNewHostedZone',
   {
     env: envEU,
     primaryHostedZoneName: primaryZoneName
