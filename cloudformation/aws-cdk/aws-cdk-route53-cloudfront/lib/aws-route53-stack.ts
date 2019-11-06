@@ -1,39 +1,60 @@
 import cdk = require('@aws-cdk/core');
-//import route53 = require('@aws-cdk/aws-route53');
-import  { PublicHostedZone, HostedZone } from '@aws-cdk/aws-route53';
-import { OrganizationPrincipal } from '@aws-cdk/aws-iam';
+import {
+  PublicHostedZone,
+  HostedZone,
+  ARecord,
+  ARecordProps,
+  AddressRecordTarget
+} from '@aws-cdk/aws-route53';
+import { BucketProps } from '../lib/aws-s3-stack';
+import { BucketWebsiteTarget } from '@aws-cdk/aws-route53-targets';
+
+interface CombinedStackProps extends BucketProps {
+  primaryHostedZoneName?: string
+}
 
 export class Route53StackNewHostedZone extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.App, id: string, props?: CombinedStackProps) {
     super(scope, id, props);
 
+    if (!props || !props.primaryHostedZoneName) {
+      console.error('Given stack properties do not contain valid parameters.');
+      return;
+    }
+
     // create a new HostedZone for a subdomain (of a tld managed otherwise)
-    new PublicHostedZone(this, 'HostedZone', {
-      zoneName: 'cdktest.lab.00x.de'
+    const zone = new PublicHostedZone(this, 'HostedZone-test', {
+      zoneName: `test-zone.${props.primaryHostedZoneName}`
     });
 
     // add NS records from new hosted zone to existing hosted zone managing the tld
-    let hostedZoneId ='Z1DRB2COKV1S59';
-
-    const zone = HostedZone.fromHostedZoneId(this, 'MyZone', hostedZoneId);
-
+    let hostedZoneId = zone.hostedZoneId;
   }
-
 }
 
 export class Route53StackPredefinedZone extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.App, id: string, props?: CombinedStackProps) {
     super(scope, id, props);
 
-    // link to a predefined HostedZone for a subdomain
-    new PublicHostedZone(this, 'HostedZone', {
-      zoneName: 'cdktest2.lab.00x.de'
+    if (!props || !props.env || !props.primaryHostedZoneName || !props.userBucket) {
+      console.error('Given stack properties do not contain valid parameters.');
+      return;
+    }
+
+    // determine the existing hosted zone
+    const zone = HostedZone.fromLookup(this, 'HostedZone-lab', {
+      domainName: `${props.primaryHostedZoneName}.`
     });
 
-    // add NS records from new hosted zone to existing hosted zone managing the tld
-    let hostedZoneId ='Z1DRB2COKV1S59';
+    // create an additional A record pointing to a bucket
+    const recordProps: ARecordProps = {
+      zone: zone,
+      recordName: `test-alias.${props.primaryHostedZoneName}.`,
+      target: AddressRecordTarget.fromAlias(new BucketWebsiteTarget(props.userBucket)),
+      ttl: cdk.Duration.minutes(5)
+    }
 
-    const zone = HostedZone.fromHostedZoneId(this, 'MyZone', hostedZoneId);
+    new ARecord(this, "AliasRecord-lab", recordProps);
 
   }
 }
