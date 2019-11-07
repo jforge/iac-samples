@@ -1,13 +1,13 @@
 import cdk = require('@aws-cdk/core');
-import {CloudFrontTarget} from '@aws-cdk/aws-route53-targets';
-import {CloudFrontWebDistribution, SSLMethod, SecurityPolicyProtocol} from '@aws-cdk/aws-cloudfront';
-import {ARecord, ARecordProps, IHostedZone, PublicHostedZone, RecordTarget} from '@aws-cdk/aws-route53';
-import {IBucket} from '@aws-cdk/aws-s3';
-import {BucketDeployment, Source} from '@aws-cdk/aws-s3-deployment';
+import r53 = require('@aws-cdk/aws-route53');
+import { DnsValidatedCertificate } from "@aws-cdk/aws-certificatemanager";
+import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
+import { CloudFrontWebDistribution, SSLMethod, SecurityPolicyProtocol } from '@aws-cdk/aws-cloudfront';
+import { IBucket } from '@aws-cdk/aws-s3';
+import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
+import { BucketStack } from "./s3-stack";
 import MultiStackProps from './config/combined-stack-properties';
 import ZoneUtils from "./util/zone-utils";
-import {BucketStack} from "./s3-stack";
-import {DnsValidatedCertificate} from "@aws-cdk/aws-certificatemanager";
 
 export class Route53MultiStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: MultiStackProps) {
@@ -25,7 +25,7 @@ export class Route53MultiStack extends cdk.Stack {
       this.buildStackWithPredefinedZone(props);
     } else {
       // create a new HostedZone for a sub domain (of a tld managed otherwise)
-      const zone = new PublicHostedZone(this, 'HostedZone-test', {
+      const zone = new r53.PublicHostedZone(this, 'HostedZone-test', {
         zoneName: `test-zone.${props.primaryHostedZoneName}`
       });
       // ...add NS records from new hosted zone to existing hosted zone managing the tld
@@ -44,9 +44,9 @@ export class Route53MultiStack extends cdk.Stack {
     }
 
     // determine the existing hosted zone
-    const zone: IHostedZone = ZoneUtils.determineHostedZone(this, props.primaryHostedZoneName);
-    new cdk.CfnOutput(this, 'Zone', {value: zone.zoneName});
-    new cdk.CfnOutput(this, 'Site', {value: 'https://' + props.siteDomain});
+    const zone: r53.IHostedZone = ZoneUtils.determineHostedZone(this, props.primaryHostedZoneName);
+    new cdk.CfnOutput(this, 'Zone', { value: zone.zoneName });
+    new cdk.CfnOutput(this, 'Site', { value: 'https://' + props.siteDomain });
 
     // TODO in CDK v1.15.0 there is an known issue with the region parameter not recognized, limiting the stack to us-east-1
     const certificate: DnsValidatedCertificate = new DnsValidatedCertificate(this, 'SiteCertificate', {
@@ -54,42 +54,52 @@ export class Route53MultiStack extends cdk.Stack {
       hostedZone: zone,
       region: 'us-east-1'
     });
-    new cdk.CfnOutput(this, 'Certificate', {value: certificate.certificateArn});
+    new cdk.CfnOutput(this, 'Certificate', { value: certificate.certificateArn });
 
     // CloudFront distribution that provides HTTPS
     const distribution: CloudFrontWebDistribution = this.buildCloudfrontDistribution(
       props.siteDomain,
       certificate.certificateArn,
       props.userBucket);
-    new cdk.CfnOutput(this, 'DistributionId', {value: distribution.distributionId});
+    new cdk.CfnOutput(this, 'DistributionId', { value: distribution.distributionId });
 
     // deploy bucket content in Cloudfront distribution context
     this.deployContentToBucket(props.userBucket, distribution);
 
     // Route53 alias record for the CloudFront distribution
-    const aRecord: ARecord = this.buildAliasRecord(
-      zone,
-      props.siteDomain,
-      distribution);
-    new cdk.CfnOutput(this, 'AliasRecord', {value: aRecord.domainName});
+    const aRecord: r53.ARecord = this.buildAliasRecord(zone, props.siteDomain, distribution);
+    new cdk.CfnOutput(this, 'AliasRecord', { value: aRecord.domainName });
 
+    let cname: string = `www.${props.siteDomain}`;
+    const cnameRecord: r53.CnameRecord = this.buildCnameRecord(zone, props.siteDomain, cname);
+    new cdk.CfnOutput(this, 'CnameRecord', { value: aRecord.domainName });
   }
 
-  buildAliasRecord(zone: IHostedZone, recordName: string, distribution: CloudFrontWebDistribution): ARecord {
-    const recordProps: ARecordProps = {
+  buildCnameRecord(zone: r53.IHostedZone, siteName: string, recordName: string): r53.CnameRecord {
+    const recordProps: r53.CnameRecordProps = {
       zone: zone,
       recordName: recordName,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
+      domainName: siteName,
+      ttl: cdk.Duration.minutes(5),
+    };
+    return new r53.CnameRecord(this, "SiteCnameRecord", recordProps);
+  }
+
+  buildAliasRecord(zone: r53.IHostedZone, recordName: string, distribution: CloudFrontWebDistribution): r53.ARecord {
+    const recordProps: r53.ARecordProps = {
+      zone: zone,
+      recordName: recordName,
+      target: r53.RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
       ttl: cdk.Duration.minutes(5)
     };
-    return new ARecord(this, "SiteAliasRecord", recordProps);
+    return new r53.ARecord(this, "SiteAliasRecord", recordProps);
   }
 
   buildCloudfrontDistribution(siteDomain: string, certificateArn: string, bucket: IBucket): CloudFrontWebDistribution {
     return new CloudFrontWebDistribution(this, 'SiteDistribution', {
       aliasConfiguration: {
         acmCertRef: certificateArn,
-        names: [siteDomain, `www.${siteDomain}`],
+        names: [siteDomain], //, `www.${siteDomain}`],
         sslMethod: SSLMethod.SNI,
         securityPolicy: SecurityPolicyProtocol.TLS_V1_2_2018,
       },
@@ -98,7 +108,7 @@ export class Route53MultiStack extends cdk.Stack {
           s3OriginSource: {
             s3BucketSource: bucket
           },
-          behaviors: [{isDefaultBehavior: true}],
+          behaviors: [{ isDefaultBehavior: true }],
         }
       ]
     });
