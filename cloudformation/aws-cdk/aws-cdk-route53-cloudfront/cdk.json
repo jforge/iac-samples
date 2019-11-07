@@ -1,4 +1,4 @@
 {
-  "app": "npx ts-node bin/aws-route53.ts",
+  "app": "npx ts-node bin/static-site-cloudfront-route53.ts",
   "versionReporting": false
 }
