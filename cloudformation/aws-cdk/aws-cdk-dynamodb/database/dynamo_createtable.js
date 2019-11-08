@@ -6,7 +6,7 @@ const config = configuration.load();
 
 var dynamodb = resourceBuilder.buildDynamoDbResource();
 
-var params = { 
+var params = {
   TableName: config.aws.dynamodb.tableName,
   AttributeDefinitions: [
     {
@@ -29,10 +29,10 @@ var params = {
     }
   ],
   BillingMode: config.aws.dynamodb.billingMode,
-  // ProvisionedThroughput: {
-  //   ReadCapacityUnits: 1,
-  //   WriteCapacityUnits: 1
-  // },
+  ProvisionedThroughput: {
+     ReadCapacityUnits: config.aws.dynamodb.readCapacityUnits,
+     WriteCapacityUnits: config.aws.dynamodb.writeCapacityUnits,
+  },
   StreamSpecification: {
     StreamEnabled: false
   }

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.554.0",
+    "copy-dynamodb-table": "^2.0.17",
     "js-yaml": "^3.13.1"
   },
   "repository": {

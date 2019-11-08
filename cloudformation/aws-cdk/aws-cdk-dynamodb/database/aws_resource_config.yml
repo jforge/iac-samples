@@ -2,8 +2,12 @@ aws:
   region: eu-central-1
   dynamodb:
     tableName: Routing-Rules
-    billingMode: PAY_PER_REQUEST
+    billingMode: PROVISIONED
+    readCapacityUnits: 5
+    writeCapacityUnits: 5
+    # billingMode: PAY_PER_REQUEST
+    # readCapacityUnits: 0
+    # writeCapacityUnits: 0
 useLocalEndpoint: false
 local:
   url: http://localhost:8000
- 
