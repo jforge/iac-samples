@@ -22,9 +22,10 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-events": "*",
-    "@aws-cdk/aws-events-targets": "*",
-    "@aws-cdk/aws-lambda": "*",
-    "@aws-cdk/core": "*"
+    "@aws-cdk/aws-certificatemanager": "^1.15.0",
+    "@aws-cdk/aws-cloudfront": "^1.15.0",
+    "@aws-cdk/aws-iam": "^1.15.0",
+    "@aws-cdk/aws-lambda": "^1.15.0",
+    "@aws-cdk/core": "^1.15.0"
   }
 }

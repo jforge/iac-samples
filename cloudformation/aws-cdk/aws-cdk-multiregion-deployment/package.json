@@ -2,7 +2,7 @@
   "name": "aws-cdk-multiregion-deployment",
   "version": "0.1.0",
   "bin": {
-    "aws-cdk-multiregion-deployment": "bin/aws-cdk-multiregion-deployment.js"
+    "aws-cdk-multiregion-deployment": "index.js"
   },
   "scripts": {
     "build": "tsc",
