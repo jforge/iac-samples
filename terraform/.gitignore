@@ -1,0 +1,14 @@
+.vscode
+.idea
+.terraform
+*.tfstate
+*.tfstate.backup
+go-lambda/go-lambda
+go-lambda-wait/go-lambda-wait
+*.zip
+.DS_Store
+.profile
+.settings
+.project
+node_modules
+

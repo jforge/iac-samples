@@ -10,22 +10,21 @@ Reasons can be acceded, let's use regular programming languages and test suites 
 
 One proposal is to use the original [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) for Cloudformation Template production in order not to immediately adopt new high level frameworks like [troposphere](https://www.thoughtworks.com/radar/languages-and-frameworks/troposphere) (Thoughtworks ASSESS) or [Pulumi](https://www.thoughtworks.com/radar/platforms/pulumi) (Thoughtworks ASSESS).
 
-
 ## AWS CDK
 
-The AWS Cloud Development Kit is developed in Typescript which is transpiled to JavaScript. 
+The AWS Cloud Development Kit is developed in Typescript which is transpiled to JavaScript.
 
-There are Bindings for other programming languages to produce Cloudformation deployments: https://docs.aws.amazon.com/de_de/cdk/latest/guide/getting_started.html
+There are bindings for other programming languages to produce Cloudformation deployments: https://docs.aws.amazon.com/de_de/cdk/latest/guide/getting_started.html
 
 Starter recommendation: [CDK Workshop](https://cdkworkshop.com/)
 
 ### AWS CDK CLI Setup
 
+```bash
 brew install aws-cdk
-
 npm i aws-cdk
-
-cdk init sample-app --language=javascript
+cdk init sample-app --language=typescript
+```
 
 ### References
 
@@ -33,7 +32,6 @@ cdk init sample-app --language=javascript
 - https://docs.aws.amazon.com/de_de/cli/latest/userguide/install-bundle.html
 - https://cdkworkshop.com/
 - https://aws.amazon.com/de/blogs/developer/serverless-data-engineering-at-zalando-with-the-aws-cdk/
-
 
 ### SimpleStack Demo
 
@@ -43,15 +41,21 @@ Switch your NVM environment to Node.js v10.16.3 (LTS: Dubnium).
 
 Switch to the aws-cdk-simplestack directory
 
+```bash
 npm install
+```
 
 #### Run unit tests with Jest
 
+```bash
 npm run test
+```
 
 #### Produce a Cloudformation Template
 
+```bash
 cdk synth --profile your-profile
+```
 
 (use --json to produce this in json instead of yaml)
 
@@ -59,16 +63,21 @@ This may be useful for manual deployment, version comparison, review/testing and
 
 #### Deploy the stack directly
 
+```bash
 cdk deploy --profile your-profile
+```
 
 #### Destroy the stack directly
 
+```bash
 cdk destroy --profile your-profile
+```
 
 #### Calculate a difference to a deployed stack
 
+```bash
 cdk diff --profile your-profile
-
+```
 
 ### Lambda Cron Demo
 
@@ -80,16 +89,12 @@ Be aware that you need createRole and passRole right to produce this stack
 
 See above.
 
-
 ### DynamDB Demo
 
 See above.
-
 
 ### Route 53 with Cloudfront Demo
 
 See above.
 
 This is based on [a forestry article](https://forestry.io/blog/adding-dns-and-edge-functions-to-our-cloudformation-stack/)
-
-
