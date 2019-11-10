@@ -2,12 +2,12 @@
 
 Samples for [Hashicorp Terraform](https://www.terraform.io/) plans to handle [AWS](https://aws.amazon.com) resources.
 
-# [Requirements](#requirements)
+## [Requirements](#requirements)
 
 * AWS account
 * Terraform >= 0.11.10
 
-# [Samples](#samples)
+## [Samples](#samples)
 
 * Terraforming [AWS API Gateway](tf-aws-apigateway/README.md)
 
@@ -15,15 +15,17 @@ Samples for [Hashicorp Terraform](https://www.terraform.io/) plans to handle [AW
 
 * Terraforming [AWS S3](tf-aws-s3/README.md)
 
-# Testing and Demos
+## Testing and Demos
 
 * Create an AWS Account
 * Download/Install/Upgrade AWS CLI
-```
+
+```bash
 sudo pip install --upgrade awscli
 ```
+
 * Create a profile, so that ```~/.aws/credentials``` contains your access information
-```
+
+```bash
 aws configure
 ```
-
