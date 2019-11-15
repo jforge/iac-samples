@@ -1,4 +1,4 @@
-var copy = require('copy-dynamodb-table').copy
+const copy = require('copy-dynamodb-table').copy
 
 copy({
       config: {

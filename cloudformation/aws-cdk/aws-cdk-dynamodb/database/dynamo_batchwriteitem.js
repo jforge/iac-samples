@@ -14,7 +14,7 @@ var params = {
            Item: {
             "host": { "S": "www.things.codes" },
             "uri": { "S": "/api" },
-            "redirects": { "S": "{ 'uri': 'api' }" }
+            "redirects": { "S": "{ 'selector': 'default' }" }
            }
          }
        },
@@ -23,7 +23,7 @@ var params = {
            Item: {
             "host": { "S": "www.things.codes" },
             "uri": { "S": "/demo" },
-            "redirects": { "S": "{ 'uri': 'demo' }" }
+            "redirects": { "S": "{ 'selector': 'default' }" }
            }
          }
        }

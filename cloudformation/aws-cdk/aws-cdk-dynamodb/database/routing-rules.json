@@ -4,8 +4,8 @@
     "uri": "/api",
     "redirects" : [
         {
-            "trigger": "default",
-            "setURI": "/index.html",
+            "selector": "default",
+            "setPath": "/index.html",
             "setOrigin": "https://api.things.codes",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
@@ -13,9 +13,10 @@
             ]
         },
         {
-            "trigger": "authToken.invalid",
-            "setURI": "https://signin.things.codes/?target=api",
-            "setOrigin": "",
+            "selector": "authToken.invalid",
+            "setPath": "/",
+            "setQuerystring": "?target=api",
+            "setOrigin": "https://signin.things.codes",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
                 { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
@@ -28,8 +29,8 @@
     "uri": "/demo",
     "redirects" : [
         {
-            "trigger": "default",
-            "setURI": "/index.html",
+            "selector": "default",
+            "setPath": "/index.html",
             "setOrigin": "https://demo.things.codes",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
@@ -37,9 +38,10 @@
             ]
         },
         {
-            "trigger": "authToken.invalid",
-            "setURI": "https://signin.things.codes/?target=demo",
-            "setOrigin": "",
+            "selector": "authToken.invalid",
+            "setPath": "/",
+            "setQuerystring": "?target=demo",
+            "setOrigin": "https://signin.things.codes",
             "setHeaders": [
                 { "referrer-policy": "same-origin" },
                 { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 

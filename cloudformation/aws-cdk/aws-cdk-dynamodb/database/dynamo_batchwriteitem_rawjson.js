@@ -13,7 +13,7 @@ var params = {
     'host' : 'www.things.codes',
     'uri' : '/api',
     'redirects' : [
-        { "trigger": "default", "setURI": "/index.html", "setOrigin": "https://api.things.codes" }
+        { "selector": "default", "setPath": "/index.html", "setOrigin": "https://api.things.codes" }
     ]
   },
   ConditionExpression: "attribute_not_exists(uri)"
@@ -28,7 +28,7 @@ var params = {
           'host' : 'www.things.codes',
           'uri' : '/api',
           'redirects' : [
-            { "trigger": "default", "setURI": "/index.html", "setOrigin": "https://api.things.codes" }
+            { "selector": "default", "setPath": "/index.html", "setOrigin": "https://api.things.codes" }
           ]
         }
       }
@@ -39,7 +39,7 @@ var params = {
           'host' : 'www.things.codes',
           'uri' : '/demo',
           'redirects' : [
-            { "trigger": "default", "setURI": "/index.html", "setOrigin": "https://demo.things.codes" }
+            { "selector": "default", "setPath": "/index.html", "setOrigin": "https://demo.things.codes" }
           ]
         }
       }
@@ -50,7 +50,7 @@ var params = {
           'host' : 'test-site.lab.00x.de',
           'uri' : '/signin',
           'redirects' : [
-            {"trigger":"default", "setURI": "/index.html", "setOrigin": "https://sign.immowelt.de" }
+            { "selector":"default", "setPath": "/index.html", "setOrigin": "https://sign.immowelt.de" }
           ]
         }
       }

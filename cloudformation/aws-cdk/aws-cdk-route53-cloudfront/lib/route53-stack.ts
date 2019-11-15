@@ -1,13 +1,16 @@
 import cdk = require('@aws-cdk/core');
 import r53 = require('@aws-cdk/aws-route53');
-import { DnsValidatedCertificate } from "@aws-cdk/aws-certificatemanager";
+import {DnsValidatedCertificate} from "@aws-cdk/aws-certificatemanager";
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
-import { CloudFrontWebDistribution, SSLMethod, SecurityPolicyProtocol } from '@aws-cdk/aws-cloudfront';
-import { IBucket } from '@aws-cdk/aws-s3';
+import {CloudFrontWebDistribution, SSLMethod, SecurityPolicyProtocol, CloudFrontWebDistributionProps} from '@aws-cdk/aws-cloudfront';
+import { IBucket} from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import { BucketStack } from "./s3-stack";
 import MultiStackProps from './config/combined-stack-properties';
 import ZoneUtils from "./util/zone-utils";
+import {BucketDeploymentProps} from "@aws-cdk/aws-s3-deployment/lib/bucket-deployment";
+import {DnsValidatedCertificateProps} from "@aws-cdk/aws-certificatemanager/lib/dns-validated-certificate";
+import {SourceConfiguration} from "@aws-cdk/aws-cloudfront/lib/web_distribution";
 
 export class Route53MultiStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: MultiStackProps) {
@@ -48,12 +51,18 @@ export class Route53MultiStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'Zone', { value: zone.zoneName });
     new cdk.CfnOutput(this, 'Site', { value: 'https://' + props.siteDomain });
 
-    // TODO in CDK v1.15.0 there is an known issue with the region parameter not recognized, limiting the stack to us-east-1
-    const certificate: DnsValidatedCertificate = new DnsValidatedCertificate(this, 'SiteCertificate', {
+    // a cloudfront certificate must be created in region us-east-1
+    let certificateProps: DnsValidatedCertificateProps = {
       domainName: props.siteDomain,
       hostedZone: zone,
-      region: 'us-east-1'
-    });
+      region: "us-east-1"
+    };
+    const certificate: DnsValidatedCertificate = new DnsValidatedCertificate(this, 'SiteCertificate', certificateProps);
+
+    // get existing certificate by arn for testing https://github.com/aws/aws-cdk/issues/3612
+    // const arn = "arn:aws:acm:us-east-1:867547455185:certificate/3922a18d-7500-43a4-85ab-1b4dff819147";
+    // const certificate = Certificate.fromCertificateArn(this, 'SiteCertificate', arn);
+
     new cdk.CfnOutput(this, 'Certificate', { value: certificate.certificateArn });
 
     // CloudFront distribution that provides HTTPS
@@ -67,12 +76,13 @@ export class Route53MultiStack extends cdk.Stack {
     this.deployContentToBucket(props.userBucket, distribution);
 
     // Route53 alias record for the CloudFront distribution
+
     const aRecord: r53.ARecord = this.buildAliasRecord(zone, props.siteDomain, distribution);
     new cdk.CfnOutput(this, 'AliasRecord', { value: aRecord.domainName });
 
     let cname: string = `www.${props.siteDomain}`;
     const cnameRecord: r53.CnameRecord = this.buildCnameRecord(zone, props.siteDomain, cname);
-    new cdk.CfnOutput(this, 'CnameRecord', { value: aRecord.domainName });
+    new cdk.CfnOutput(this, 'CnameRecord', { value: cnameRecord.domainName });
   }
 
   buildCnameRecord(zone: r53.IHostedZone, siteName: string, recordName: string): r53.CnameRecord {
@@ -92,14 +102,15 @@ export class Route53MultiStack extends cdk.Stack {
       target: r53.RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
       ttl: cdk.Duration.minutes(5)
     };
+
     return new r53.ARecord(this, "SiteAliasRecord", recordProps);
   }
 
   buildCloudfrontDistribution(siteDomain: string, certificateArn: string, bucket: IBucket): CloudFrontWebDistribution {
-    return new CloudFrontWebDistribution(this, 'SiteDistribution', {
+    let distributionProps: CloudFrontWebDistributionProps = {
       aliasConfiguration: {
         acmCertRef: certificateArn,
-        names: [siteDomain], //, `www.${siteDomain}`],
+        names: [siteDomain,`www.${siteDomain}`],
         sslMethod: SSLMethod.SNI,
         securityPolicy: SecurityPolicyProtocol.TLS_V1_2_2018,
       },
@@ -111,15 +122,19 @@ export class Route53MultiStack extends cdk.Stack {
           behaviors: [{ isDefaultBehavior: true }],
         }
       ]
-    });
+    };
+
+    return new CloudFrontWebDistribution(this, 'SiteDistribution', distributionProps);
   }
 
   deployContentToBucket(bucket: IBucket, distribution: CloudFrontWebDistribution) {
-    new BucketDeployment(this, 'DeployContentWithInvalidation', {
+    let bucketDeploymentProps: BucketDeploymentProps = {
       sources: [Source.asset('./assets')],
       destinationBucket: bucket,
-      distribution,
-      distributionPaths: ['/*'],
-    });
+//      distribution,
+//      distributionPaths: ['/*'],
+    };
+
+    new BucketDeployment(this, 'DeployContentWithInvalidation', bucketDeploymentProps);
   }
 }

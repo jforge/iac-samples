@@ -2,12 +2,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const util = require('util');
 const yaml = require('js-yaml');
 const AWS = require('aws-sdk');
 
 const configuration = {
-    load: function () { 
+    load: function () {
         try {
             var filename = path.join(__dirname, 'aws_resource_config.yml'),
                 contents = fs.readFileSync(filename, 'utf8'),

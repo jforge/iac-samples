@@ -1,5 +1,4 @@
 'use strict';
-
 const sourceCoookie = 'X-Source';
 const sourceMain = 'main';
 const sourceExperiment = 'experiment';

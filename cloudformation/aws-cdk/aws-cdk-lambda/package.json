@@ -16,8 +16,8 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/node": "^8.10.38",
-    "ts-node": "^8.4.1",
+    "@types/node": "^12.12.7",
+    "ts-node": "^8.5.0",
     "ts-clean": "^1.0.2",
     "typescript": "^3.7.2"
   },

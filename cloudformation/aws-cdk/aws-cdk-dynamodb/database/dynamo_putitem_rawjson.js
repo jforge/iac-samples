@@ -12,7 +12,7 @@ var params = {
     'host' : 'www.things.codes',
     'uri' : '/api',
     'redirects' : [
-        { "trigger": "default", "setURI": "/index.html", "setOrigin": "https://api.things.codes" }
+        { "selector": "default", "setPath": "/index.html", "setOrigin": "https://api.things.codes" }
     ]
   },
   ConditionExpression: "attribute_not_exists(uri)"

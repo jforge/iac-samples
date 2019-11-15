@@ -23,7 +23,7 @@ const app = new cdk.App();
 
 // build the route53-cloudfront stack
 new Route53MultiStack(app, 'StaticSiteStack', {
-  env: envUSEast1,
+  env: envEU,
   primaryHostedZoneName: primaryZoneName,
   usePredefinedZone: useExistingHostedZone,
   siteDomain: siteDomain

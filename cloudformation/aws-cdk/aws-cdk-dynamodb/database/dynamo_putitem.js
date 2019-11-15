@@ -14,13 +14,13 @@ var params = {
     'redirects' : {L : [
         {
           "M": {
-            "setURI": {
+            "setPath": {
               "S": "/index.html"
             },
             "setOrigin": {
               "S": "https://demo.things.codes"
             },
-            "trigger": {
+            "selector": {
               "S": "default"
             }
           }
