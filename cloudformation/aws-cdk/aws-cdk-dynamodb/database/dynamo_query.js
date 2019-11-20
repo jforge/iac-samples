@@ -12,7 +12,7 @@ var params = {
   FilterExpression: 'contains (redirects[0].setOrigin, :origin)',
   ExpressionAttributeValues: {
     ':host': 'www.things.codes',
-    ':uri': '/d',
+    ':uri': '/',
     ':origin': '.things.codes'
   }
 };

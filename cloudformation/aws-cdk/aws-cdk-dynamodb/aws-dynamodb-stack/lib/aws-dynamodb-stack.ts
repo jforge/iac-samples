@@ -14,13 +14,13 @@ export class AwsDynamodbStack extends Stack {
       billingMode: BillingMode.PAY_PER_REQUEST,
       removalPolicy: RemovalPolicy.DESTROY,
       tableName: tableName
-    }
+    };
 
     const table = new Table(this, 'routing-rules', tableProps);
 
     const parameterProps: StringParameterProps = {
       description: 'name of the routing rules dynamodb table',
-      parameterName: 'routing_rules_table_name',
+      parameterName: '/DeploymentConfig/dev/RequestRouting/DynamoDB/TableName',
       stringValue: tableName
     };
 

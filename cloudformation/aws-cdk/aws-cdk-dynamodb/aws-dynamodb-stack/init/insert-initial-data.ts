@@ -9,16 +9,16 @@ function initialSetup() {
 
   // retrieve the latest tableName value of the non-secret parameter
   // and store initial data into the table
-  getParameterValue('routing_rules_table_name')
+  getParameterValue('/DeploymentConfig/dev/RequestRouting/DynamoDB/TableName')
     .then(function (tableName) {
       if (!tableName) {
-        console.error("tableName cannot be retrieved from Parameter Store");
+        console.error("table name cannot be retrieved from Parameter Store");
       } else {
         console.log(tableName);
         storeInitialData(tableName);
       }
     }, function (reason) {
-      console.error("error reading parameter from parameters store", reason);
+      console.error("error reading parameter from Parameter Store", reason);
     });
 };
 

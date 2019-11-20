@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-DYNAMODB_TABLE_NAME="Routing-Rules"
+aws ssm get-parameters-by-path --path /DeploymentConfig
 
-aws dynamodb delete-table --table-name $DYNAMODB_TABLE_NAME
+dynamoDbTableName=$(aws ssm get-parameter --name /DeploymentConfig/dev/RequestRouting/DynamoDB/TableName --query Parameter.Value)
+
+aws dynamodb delete-table --table-name $dynamoDbTableName
