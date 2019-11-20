@@ -10,9 +10,9 @@ export class AwsDynamodbStack extends Stack {
 
     const tableProps: TableProps = {
       partitionKey: { name: 'host', type: AttributeType.STRING },
-      sortKey: { name: 'url', type: AttributeType.STRING },
+      sortKey: { name: 'uri', type: AttributeType.STRING },
       billingMode: BillingMode.PAY_PER_REQUEST,
-      removalPolicy: RemovalPolicy.RETAIN,
+      removalPolicy: RemovalPolicy.DESTROY,
       tableName: tableName
     }
 
