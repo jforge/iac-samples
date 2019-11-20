@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-aws ssm get-parameters-by-path --path /DeploymentConfig
+PROFILE="default"
 
-dynamoDbTableName=$(aws ssm get-parameter --name /DeploymentConfig/dev/RequestRouting/DynamoDB/TableName --query Parameter.Value)
+aws ssm get-parameters-by-path --path /DeploymentConfig --profile $PROFILE
 
-aws dynamodb delete-table --table-name $dynamoDbTableName
+dynamoDbTableName=$(aws ssm get-parameter --name /DeploymentConfig/dev/RequestRouting/DynamoDB/TableName --query Parameter.Value --profile $PROFILE)
+
+aws dynamodb delete-table --table-name $dynamoDbTableName --profile $PROFILE

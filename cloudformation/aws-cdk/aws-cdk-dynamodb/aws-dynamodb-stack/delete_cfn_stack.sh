@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-STACK_NAME="AwsDynamodbStack"
+PROFILE="default"
+STACK_NAME="DynamodbStack"
 
-aws cloudformation delete-stack --stack-name $STACK_NAME
+aws cloudformation delete-stack --stack-name $STACK_NAME --profle $PROFILE
