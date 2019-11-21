@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-PROFILE="default"
-STACK_NAME="DynamodbStack"
+source exportAwsEnvironment.sh
 
-aws cloudformation delete-stack --stack-name $STACK_NAME --profle $PROFILE
+echo "Deleting Stack for Profile $AWS_PROFILE in region $AWS_DEFAULT_REGION"
+
+STACK_NAME=AwsDynamodbStack
+
+aws cloudformation delete-stack --stack-name $STACK_NAME

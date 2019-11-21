@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-PROFILE="default"
+source exportAwsEnvironment.sh
 
-aws ssm get-parameters-by-path --path /DeploymentConfig --profile $PROFILE
+echo "Deleting DynamoDB Table for Profile $AWS_PROFILE in region $AWS_DEFAULT_REGION"
 
-dynamoDbTableName=$(aws ssm get-parameter --name /DeploymentConfig/dev/RequestRouting/DynamoDB/TableName --query Parameter.Value --profile $PROFILE)
+dynamoDbTableName=$(aws ssm get-parameter --name /DeploymentConfig/dev/RequestRouting/DynamoDB/TableName --query Parameter.Value | tr -d '\"')
 
-aws dynamodb delete-table --table-name $dynamoDbTableName --profile $PROFILE
+aws dynamodb delete-table --table-name $dynamoDbTableName
