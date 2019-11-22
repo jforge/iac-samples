@@ -1,16 +1,15 @@
 import cdk = require('@aws-cdk/core');
 import r53 = require('@aws-cdk/aws-route53');
-import {DnsValidatedCertificate} from "@aws-cdk/aws-certificatemanager";
+import { DnsValidatedCertificate, DnsValidatedCertificateProps } from "@aws-cdk/aws-certificatemanager";
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
-import {CloudFrontWebDistribution, SSLMethod, SecurityPolicyProtocol, CloudFrontWebDistributionProps} from '@aws-cdk/aws-cloudfront';
-import { IBucket} from '@aws-cdk/aws-s3';
+import { CloudFrontWebDistribution, SSLMethod, SecurityPolicyProtocol, CloudFrontWebDistributionProps } from '@aws-cdk/aws-cloudfront';
+import { IBucket } from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import { BucketStack } from "./s3-stack";
 import MultiStackProps from './config/combined-stack-properties';
 import ZoneUtils from "./util/zone-utils";
-import {BucketDeploymentProps} from "@aws-cdk/aws-s3-deployment/lib/bucket-deployment";
-import {DnsValidatedCertificateProps} from "@aws-cdk/aws-certificatemanager/lib/dns-validated-certificate";
-import {SourceConfiguration} from "@aws-cdk/aws-cloudfront/lib/web_distribution";
+import { BucketDeploymentProps } from "@aws-cdk/aws-s3-deployment/lib/bucket-deployment";
+import { SourceConfiguration } from "@aws-cdk/aws-cloudfront/lib/web_distribution";
 
 export class Route53MultiStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: MultiStackProps) {
@@ -110,7 +109,7 @@ export class Route53MultiStack extends cdk.Stack {
     let distributionProps: CloudFrontWebDistributionProps = {
       aliasConfiguration: {
         acmCertRef: certificateArn,
-        names: [siteDomain,`www.${siteDomain}`],
+        names: [siteDomain, `www.${siteDomain}`],
         sslMethod: SSLMethod.SNI,
         securityPolicy: SecurityPolicyProtocol.TLS_V1_2_2018,
       },
@@ -131,8 +130,8 @@ export class Route53MultiStack extends cdk.Stack {
     let bucketDeploymentProps: BucketDeploymentProps = {
       sources: [Source.asset('./assets')],
       destinationBucket: bucket,
-//      distribution,
-//      distributionPaths: ['/*'],
+      //      distribution,
+      //      distributionPaths: ['/*'],
     };
 
     new BucketDeployment(this, 'DeployContentWithInvalidation', bucketDeploymentProps);
