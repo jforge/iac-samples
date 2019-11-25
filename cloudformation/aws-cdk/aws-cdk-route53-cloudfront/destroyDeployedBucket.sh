@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Removes a (non-empty)  bucket deployed with cdk and found in it's yaml'd cloudformation stack
+# Removes a (non-empty) bucket deployed with cdk and found in it's yaml'd cloudformation stack
 # You new jq, aws-cli and a default configuration matching the CDK environment
 #
 
