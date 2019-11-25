@@ -9,36 +9,49 @@ console.log(config);
 AWS.config.update({ region: config.aws.region });
 
 // Create DynamoDB service object
-var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+var dynamodb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
-// TODO read routing-rules.json
-// TODO for every element create Item resource and send PutRequests
+// read routing-rules.json
+const fs = require('fs');
+const path = require('path');
 
-var params = {
-  RequestItems: {
-    [config.aws.tableName]: [
-       {
-         PutRequest: {
-           Item: {
+const redirectRules = {
+    load: function () {
+        try {
+            var filename = path.join(__dirname, 'routing-rules.json'),
+                contents = fs.readFileSync(filename, 'utf8'),
+                data = JSON.parse(contents);
+            return data;
+        } catch (err) {
+            console.log(err.stack || String(err));
+        }
+    }
+}
 
-           }
-         }
-       },
-       {
-         PutRequest: {
-           Item: {
+let rules = redirectRules.load();
+console.log(rules);
 
-           }
-         }
-       }
-    ]
-  }
-};
+rules.forEach(obj => {
+  Object.entries(obj).forEach(([key, value]) => {
+      console.log(`${key} ${value}`);
+  });
+  putItem(obj);
+  console.log('-------------------');
+});
 
-ddb.batchWriteItem(params, function(err, data) {
+// for every element create Item resource and send PutRequests
+function putItem(item) {
+  var params = {
+    TableName: config.aws.dynamodb.tableName,
+    Item: item,
+    ConditionExpression: "attribute_not_exists(uri)"
+  };
+
+  dynamodb.put(params, function(err, data) {
     if (err) {
       console.log("Error", err);
     } else {
       console.log("Success", data);
     }
   });
+}

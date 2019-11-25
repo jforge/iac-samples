@@ -8,8 +8,8 @@
             "setPath": "/index.html",
             "setOrigin": "https://api.things.codes",
             "setHeaders": [
-                { "referrer-policy": "same-origin" },
-                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+              { "referrer-policy": "same-origin" },
+              { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" }
             ]
         },
         {
@@ -18,8 +18,8 @@
             "setQuerystring": "?target=api",
             "setOrigin": "https://signin.things.codes",
             "setHeaders": [
-                { "referrer-policy": "same-origin" },
-                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+              { "referrer-policy": "same-origin" },
+              { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" }
             ]
         }
     ]
@@ -33,8 +33,8 @@
             "setPath": "/index.html",
             "setOrigin": "https://demo.things.codes",
             "setHeaders": [
-                { "referrer-policy": "same-origin" },
-                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+              { "referrer-policy": "same-origin" },
+              { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" }
             ]
         },
         {
@@ -43,8 +43,8 @@
             "setQuerystring": "?target=demo",
             "setOrigin": "https://signin.things.codes",
             "setHeaders": [
-                { "referrer-policy": "same-origin" },
-                { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" } 
+              { "referrer-policy": "same-origin" },
+              { "strict-transport-security": "max-age= 63072000; includeSubdomains; preload" }
             ]
         }
     ]
