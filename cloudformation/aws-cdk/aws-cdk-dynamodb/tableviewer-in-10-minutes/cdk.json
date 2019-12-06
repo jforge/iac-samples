@@ -1,0 +1,3 @@
+{
+  "app": "npx ts-node bin/tableviewer-in-10-minutes.ts"
+}
