@@ -1,4 +1,7 @@
-# IaC samples for the Amazon Cloud Services
+
+# Infrastructure as Code samples
+
+## IaC samples for the Amazon Cloud Services
 
 Infrastructure as Code examples demonstrating 
 [Terraform](https://www.terraform.io), 
@@ -7,7 +10,7 @@ and higher level development kits (frameworks and tools) to avoid handwritten Ia
 
 The following list raises no claims on completeness (please open an issue or a pull request for enhancements).
 
-## Cloudformation
+### Cloudformation
 
 Handwritten [Cloudformation](https://aws.amazon.com/de/cloudformation/) templates is [classified as HOLD on the Thoughtworks Tech Radar](https://www.thoughtworks.com/de/radar/tools/handwritten-cloudformation) for good reasons.
 
@@ -17,7 +20,7 @@ In the end, one may state: "We want Infrastructure as Code, not Infrastructure a
 
 In short the following tools finally produce Cloudformation Templates, provide (structural) shortcuts to Cloudformation and offer high-level development capabilities.
 
-### AWS Cloud Development Kit
+#### AWS Cloud Development Kit
 
 [AWS CDK Homepage](https://aws.amazon.com/de/cdk/)
 
@@ -30,8 +33,7 @@ To get familiar with it, visit the [CDK Workshop](https://cdkworkshop.com/) for 
 
 With a clear demand for using AWS this may be a preferred way to work with IaC.
 
-
-### CFN Modules
+#### CFN Modules
 
 Similar to Terraoform then project [CFN Modules](https://github.com/cfn-modules) provides a way to work with
 modularization within Cloudformation.
@@ -40,8 +42,7 @@ See the [CFN Introduction](https://cloudonaut.io/easy-going-aws-cloudformation-c
 
 Being familiar with Terraform this project may have the lowest conceptual obstacle.
 
-
-### Troposphere
+#### Troposphere
 
 [Troposhere Homepage](https://github.com/cloudtools/troposphere).
 
@@ -49,7 +50,7 @@ This is a Python-based tool being around for quite some time and [good reputatio
 
 If you are familiar with Python, this mature tool may be a good option.
 
-### Sceptre
+#### Sceptre
 
 [Sceptre](https://sceptre.cloudreach.com) is another tool to drive CloudFormation also being around since 2017.
 
@@ -58,14 +59,13 @@ and [Github](https://github.com/Sceptre/sceptre).
 
 It has a Python background and provides support for templates written in JSON, YAML, Jinja2 or Python DSLs such as [Troposphere](https://github.com/cloudtools/troposphere).
 
-
-### Stack Deployment Tool
+#### Stack Deployment Tool
 
 [Stack Deployment Tool](https://github.com/capitalone/stack-deployment-tool) is another option to simply the work with Cloudformation templates.
 
 This is part of the Open Source projects of [Capital One](https://developer.capitalone.com/resources/open-source)
 
-## Terraform
+### Terraform
 
 [Terraform](https://www.terraform.io) may be rated as some incumbent of IaC tools.
 
@@ -73,12 +73,11 @@ It's widely adopted, and with a least the [Hashicorp Language (HCL)](https://www
 
 Terraform is a well-known good practice to work on infrastructure and widely integrated with other tools and cloud environments, see for example the [Pulumi Terraform Bridge](https://github.com/pulumi/pulumi-terraform).
 
-
-## Multi-Cloud and other/classic IaC tools
+### Multi-Cloud and other/classic IaC tools
 
 Multi Cloud, Hybrid and [Private Cloud](https://opennebula.org/) approaches address the need to deploy infrastructure not only on dedicated hardware, your own on-premise datacenters etc. but also to any cloud provider environments (maybe due to a policy to avoid Vendor Lock-in or simply global operative requirements).
 
-### Pulumi
+#### Pulumi
 
 The [Pulumi Homepage](https://www.pulumi.com) describe itself as
 
@@ -90,8 +89,7 @@ Which in short summarizes today's developer orientiation concerning cloud native
 
 See [Github](https://github.com/pulumi/) to get started.
 
-
-### More on IaC
+#### More on IaC
 
 A (non-curated) list of classic Infrastructure as Code tools and discussion about IaC can be found in a [Thorntech article](https://www.thorntech.com/2018/04/15-infrastructure-as-code-tools/).
 
@@ -101,3 +99,48 @@ Another approach and alternative platform is [Cloudfoundry](https://www.cloudfou
 
 Also see [More cloud tools and helpers](https://github.com/cloudtools).
 
+## IaC samples for the Microsoft Azure Service
+
+### Setup Azure CLI
+
+In case of not using Docker or browser based tools:
+
+```bash
+brew update && brew install azure-cli
+```
+
+Test:
+
+```bash
+az account list
+```
+
+## IaC samples for the Google Cloud Service
+
+### Setup Google Cloud CLI
+
+In case of not using Docker or Google Cloud Shell:
+
+```bash
+brew cask install gcloud
+```
+
+At the time of writing Python 2 is required to use the complete 
+feature stack of Google Cloud.
+
+Use Pyenv for multiple Python versions, install at least one LTS
+Python 2 and Python 3 version and select the required version locally: e.g.
+
+```bash
+pyenv local 2.7.16
+```
+
+If this version is installed using pyenv, the command creates 
+a file `.python-version` in the local filesystem. Ensure either
+an appropriate development guide or commit it to your SCM.
+
+Test:
+
+```bash
+gcloud info
+```
