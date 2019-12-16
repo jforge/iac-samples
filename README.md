@@ -99,7 +99,7 @@ Another approach and alternative platform is [Cloudfoundry](https://www.cloudfou
 
 Also see [More cloud tools and helpers](https://github.com/cloudtools).
 
-## IaC samples for the Microsoft Azure Service
+## IaC samples for the Microsoft Azure Services
 
 ### Setup Azure CLI
 

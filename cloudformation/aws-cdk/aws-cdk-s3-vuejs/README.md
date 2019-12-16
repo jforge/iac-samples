@@ -8,4 +8,3 @@ Work in progress.
 
 [Lambda CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-lambda-readme.html)
 [S3 CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-s3-readme.html)
-
