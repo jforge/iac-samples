@@ -1,0 +1,441 @@
+= Tinkerforge UI mit Vaadin & MQTT
+Klaus Pittig <klaus@pittig.de>
+2016-05-09
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+
+[NOTE.speaker]
+--
+Wer seid Ihr, was macht Ihr?
+Programmiersprachen (Java, Python, C#, Node.js...)
+Elektronik-Spezialisten, Microcontroller-Boards?
+Eventuell Tinkerforge Kenntnisse?
+Wer kennt MQTT oder hat schon damit gearbeitet?
+Mosquitto, Moquette, Artemis, ActiveMQ, HiveMQ?
+--
+
+== Kurz zu mir
+
+* Softwareentwickler bei Immonet/Immowelt in Hamburg.
+* Verteilte Systeme, Web-Services, Anwendungs- und Datenintegration.
+* 18 Jahre Java mit <n>-jährigen Ausflügen in andere Sprachen/Welten.
+* Likes: Open Source und Open Hardware.
+* Advanced in Enterprise Integraton Patterns, Message Broker
+* Hobbyist in TinkerForge, RaspberryPi. Arduino, ESP8266 etc.
+
+== Ziel
+
+Schnell und einfach mit vorhandenen Programmierkenntnissen
+Sensoren/Aktoren mit einer ansprechenden Oberfläche versehen.
+
+[NOTE.speaker]
+--
+* Bedarf: Abkürzungen/Zeitersparnis trotz großen Interesses.
+* Pragmatisch: Interesse und etwas Hintergrundwissen ist da, ich will Rohdaten sehen,
+denke an "Env Monitoring" und vll. "Predictive Maintenance" als Teildisziplin im "IoT"
+
+Talk Abstract:
+
+Das wird im Code gezeigt, vorgeführt und ggf. mit weiterer Hardware live erweitert,
+falls noch Zeit übrig sein sollte.
+
+Ein Programmierer möchte zügig zur Entwicklung einer Anwendung im Zusammenhang mit
+Sensordaten und Aktoren kommen und daher das Prototyping der Hardware anderen überlassen.
+Das Ziel sollte also sein, Hardwarezugriffe möglichst effizient zu abstrahieren und
+möglichst viel in der Programmiersprache der Wahl zu sprechen.
+
+1.) Mit Java 8 verwende ich das elektronische Baukastensystem von TinkerForge, das mir
+die Abstraktion der Sensoren über ein einheitliches Protokoll und einer leicht
+verständlichen API bietet, mit dem sich ein Prototyp in wenigen Minuten realisieren lässt.
+
+2.) Die Visualisierung von Rohdaten möchte ich mit einer Oberfläche bewerkstelligen,
+- die schnell und nur einmal entwickelt werden muss,
+- für das Web geeignet ist,
+- dynamische Charts/Graphen unterstützt
+- und möglichst vollständig mit derselben Sprache produziert wird.
+
+Aus diesem Grund verwende ich mit meinem Java-Fokus das Vaadin-Framework und das Vaadin Charts Add-on.
+
+3.) Um die Hardware und ihre Zugriffskomponenten möglichst stark von der Oberfläche zu
+entkoppeln und die asynchrone Kommunikation verschiedener Anwendungen mit vielen Sensoren
+im Netzwerk zu bewerkstelligen, wird schließlich ein MQTT-Broker mit einem MQTT-Proxy zur
+Hardware-Abstraktion eingesetzt, so dass die Vaadin Web-Anwendung zur Verwendung von
+Sensordaten lediglich Subscriptions zu einem Broker und eine Schnittstellenvereinbarung benötigt.
+
+Wir können mit dieser Vorgehensweise nun sukzessive weitere Sensoren und Aktoren leicht in das
+Netzwerk integrieren, über MQTT-Broker und -Proxy einheitlich abstrahieren und die bidirektionale
+asynchrone Kommunikation mit der Hardware über Publish/Subscribe Verfahren erleichtern.
+--
+
+== Verwendete quelloffene Technologien
+
+[%step]
+* Tinkerforge Komponenten (Hardware und API-Bindings)
+* MQTT mit Eclipse Paho (Client) und Mosquitto (Broker).
+* Python (Brick MQTT Proxy)
+* Java 8 (Anwendung)
+* Vaadin (Web-Framework)
+
+[NOTE.speaker]
+--
+Github resource TinkerForge:
+* https://github.com/Tinkerforge
+* https://github.com/Tinkerforge/brick-mqtt-proxy
+
+Eigene Erweiterungen für den Brick Mqtt Proxy:
+* alternativer topic prefix
+* Proxy erweitert für BrickletGPS
+* Proxy ergänzt für Bricklet
+1 LEDStrip
+2 MultiTouch
+3 Rotary Encoder
+4 UV
+5 CO2
+6 SegmentDisplay4x7
+7 LoadCell
+8 RealTime Clock
+--
+
+=== TinkerForge
+
+[%step]
+* http://tinkerforge.de
+* Ein elektronisches Baukastensystem zum Rapid Prototyping mit einfachen Schnittstellen.
+* Bricks - Stapelbare Module zum Messen und Steuern über USB
+* Bricklets - Nicht stapelbare Sensor-/Aktormodule, die die Fähigkeiten von Bricks erweitern.
+* Master Extensions - Erweitern die Schnittstellen von Master Bricks (WLAN, Ethernet, RS485).
+
+[NOTE.speaker]
+--
+* Show IMU-Brick
+** IMU - inertial measurement unit
+** AHRS - Attitude and heading reference system
+** 9 Freiheitsgrade (je 3-Achsen Beschleunigungssensor, Kompass, Gyroskop)
+* Show how-to update firmware for bricklets
+** Rotary Encoder:
+http://www.tinkerunity.org/forum/index.php/topic,674.msg22118.html#msg22118
+
+
+* Baukastensystem mit breitem Spektrum an Modulen
+
+Die aufeinander abgestimmten Tinkerforge Module erlauben es dem erfahrenen Programmierer sich auf die
+Software zu konzentrieren, dadurch können Projekte schneller umgesetzt werden. Anfängern bietet Tinkerforge
+hingegen die Möglichkeit, mittels spannenden Anwendungen das Programmieren zu lernen.
+
+* Keine detaillierten Elektronikkenntnisse notwendig
+
+Die Umsetzung eines Projekts mit Tinkerforge geht leicht von der Hand. Einfach die benötigten Module
+aus dem Baukasten wählen und zusammenstecken. Es sind keine besonderen Elektronikkenntnisse notwendig
+und auf Löten kann verzichtet werden.
+Soll zum Beispiel temperaturabhängig ein Motor gesteuert werden, so muss lediglich ein Temperatursensor
+und eine zum Motor passende Motorsteuerung aus dem Baukastensystem ausgewählt werden.
+
+* Intuitive API
+
+Die Tinkerforge API bietet intuitive Funktionen, die die Programmierung vereinfachen.
+So kann zum Beispiel mittels setVelocity() die Geschwindigkeit eines Motors in Meter pro Sekunde (m/s)
+eingestellt und mittels getTemperature() die Temperatur in Grad Celsius (°C) ausgelesen werden.
+
+* Bricks
+
+Bricks sind per USB steuerbare Bausteine. Jeder Brick besitzt eine Aufgabe, wie zum Beispiel das
+Steuern von DC-, Schritt- oder Servo Motoren. Mit Master Bricks können Stapel von Bricks gebildet werden.
+Jeder Stapel benötigt dann nur eine USB Verbindung. Der RED Brick kann dazu genutzt werden um Programme
+direkt auszuführen und eigenständige Anwendungen zu realisieren ohne die Notwendigkeit externer Geräte
+zur Steuerung.
+
+* Bricklets
+
+Bricklets erweitern die Fähigkeiten von Bricks und werden an diese per Kabel angeschlossen. Es gibt
+diverse Sensor-Bricklets zum Messen von physikalischen Größen, wie Temperatur, Luftfeuchtigkeit, Distanz
+etc. Eine weitere Gruppe von Bricklets dient dem Steuern von LCDs oder genereller analoger und digitaler
+Ein- und Ausgabe.
+
+* Master Extensions
+
+Über Master Extensions können die Schnittstellen von einzelnen Master Bricks oder ganzen Stapeln von
+Bricks erweitert werden. So ist es möglich Stapel untereinander zu vernetzen oder sie per Ethernet
+oder WLAN von außen zu steuern.
+
+* Der Python Brick Proxy
+https://github.com/Tinkerforge/brick-mqtt-proxy
+
+** TinkerForge (TF)  is an open source hardware platform of stackable microcontroller building blocks (Bricks)
+that can control different modules (Bricklets).
+Hardware can be controlled by applications written in various languages like C, Delphi, Java etc..
+API's are available accordingly.
+
+class BrickletNFCRFID(DeviceProxy):
+    DEVICE_CLASS = BrickletNFCRFID
+    TOPIC_PREFIX = 'bricklet/nfc_rfid'
+    GETTER_SPECS = [('get_tag_id', 'tag_id', None),
+                    ('get_state', 'state', None),
+                    ('get_page', 'data', 'data')]
+    SETTER_SPECS = [('request_tag_id', 'request_tag_id/set', ['tag_type']),
+                    ('authenticate_mifare_classic_page',
+'authenticate_mifare_classic_page/set', ['page', 'key_number', 'key']),
+                    ('write_page', 'write_page/set', ['page', 'data']),
+                    ('request_page', 'request_page/set', ['page'])]
+
+--
+
+=== MQTT, Eclipse Paho, Mosquitto
+
+[%step]
+* http://eclipse.org/paho
+* MQTT ist ein leichtgewichtiges M2M Publish/Subscribe Connectivity Protokoll.
+* Eclipse Paho ist eine MQTT Client Bibliothek für verschiedene Programmiersprachen.
+* Mosquitto ist eine leichtgewichtige Server Implementierung für MQTT und MQTT-SN.
+
+[NOTE.speaker]
+--
+http://mqtt.org/
+http://mqtt.org/faq
+http://mosquitto.org
+https://jaxenter.de/eclipse-paho-1-1-mosquitto-1-4-16966
+
+"MQTT is a machine-to-machine (M2M)/"Internet of Things" connectivity protocol.
+It was designed as an extremely lightweight publish/subscribe messaging transport..."
+--
+
+=== Vaadin
+
+[%step]
+* http://vaadin.com
+* Vaadin ist ein freies Web-Application Framework für Rich Internet Applications (RIA).
+* Vaadin-Anwendungen werden in Java geschrieben, ein Großteil der Programmlogik läuft auf dem Server.
+* Client-seitig baut Vaadin auf GWT zur Darstellung von Webseiten auf.
+* Vaadin Charts ist eine (kostenpflichtige) Bibliothek mit Komponenten für die Darstellung
+von animierten und interaktiven Diagrammen in Vaadin Apps.
+
+[NOTE.speaker]
+--
+Vaadin Vorteile
+* Viele vorgefertigte Layout- und UI-Komponenten
+* Große Community / weite Verbreitung
+* Klares Datenmodell
+* Nutzung aller Java-Libraries möglich
+* Viele Add-Ons
+* Schnelle Architektur
+* Basiert auf GWT
+* Eine Programmiersprache (Java)
+
+Im Gegensatz zu JavaScript-Bibliotheken und auf Browser-Plugins basierenden Lösungen bietet
+es eine serverseitige Architektur; der Großteil der Programmlogik läuft auf dem Server.
+
+Eines der Hauptmerkmale von Vaadin ist, dass der Softwareentwickler die gesamte Anwendung in Java schreiben kann.
+Das Programmiermodell wird näher an die Modelle üblicher GUI-Software herangebracht als bei traditioneller
+Webentwicklung mit HTML und JavaScript.
+
+Vaadin benutzt das Ajax-Framework Google Web Toolkit (GWT) zum Darstellen von Webseiten.
+Vaadins Standardkomponenten können mit eigenen GWT-Steuerelementen erweitert werden,
+für die Themes mit CSS erstellt werden können.
+--
+
+== Was lassen wir aus?
+
+[%step]
+* Persistenz
+* Sicherheit, Verschlüsselung
+* Minicomputer (Raspberry Pi, TF RedBrick etc.)
+* Verteilte bzw. kabellose Demos
+* Die letzte Weisheit zu Quellcode/Patterns/Frameworks
+
+[NOTE.speaker]
+--
+Diese Themen sind zu umfangreich, um sie im Talk komplett zu behandeln.
+--
+
+== Signale der Sensoren mitverfolgen
+
+Auf Eurem Gerät z.B. mit "MQTT Dashboard" (Android).
+
+MQTT Broker (Mosquitto):
+
+* tcp://things.online:1883
+
+Topic-Subscriptions:
+
+* tinkerforge/#
+* tinkerforge/bricklet/#
+* tinkerforge/bricklet/temperature/#
+
+[NOTE.speaker]
+--
+https://play.google.com/store/apps/details?id=com.thn.iotmqttdashboard&hl=de
+--
+
+=== Nachrichteninhalte
+
+Der Brick MQTT Proxy normalisiert in ein Json-Format
+
+Beispiel Temperatursensor:
+
+[source]
+.Topic
+----
+tinkerforge/bricklet/temperature/dzj/temperature
+----
+
+
+[source]
+.Message
+----
+{"_timestamp":1462706479.248,"temperature":2756}
+----
+
+=== Beispiel Aktor Segmentanzeige
+
+[source]
+.Topic
+----
+tinkerforge/bricklet/segment_display_4x7/pUj/segments/set
+----
+
+[source]
+.Message
+----
+{ "segments": [ 0, 0, 0, 0 ], "brightness": 0, "colon": false}
+----
+
+[source]
+.Topic
+----
+tinkerforge/bricklet/segment_display_4x7/pUj/start_counter/set
+----
+
+[source]
+.Message
+----
+{ "value_from": 600, "value_to": 0, "increment": -1, "length": 1000}
+----
+
+
+[NOTE.speaker]
+--
+- Segment Display:
+tinkerforge/bricklet/segment_display_4x7/pUj/segments/set
+{ "segments": [ 6, 79, 79, 7 ], "brightness": 7, "colon": true }
+{ "segments": [ 0, 0, 0, 0 ], "brightness": 0, "colon": false}
+
+tinkerforge/bricklet/segment_display_4x7/pUj/start_counter/set
+{ "value_from": 0, "value_to": 500, "increment": 5, "length": 100}
+
+- GPS:
+tinkerforge/bricklet/gps/f7q/coordinates
+{"_timestamp":1461308368.43,"hdop":99,"pdop":167,"longitude":10262482,"vdop":135,"latitude":53720249,"ew":"E","ns":"N","epe":292}
+
+- CO2:
+http://www.pluggit.com/portal/de/co2-der-wichtigste-indikator-fuer-dieluftqualitaet-154
+--
+
+
+== Wunschvorstellung
+
+image::shutterstock_383893378.jpg[caption="&copy; Clari Massimiliano / shutterstock.com", scaledwidth=80%]
+//image::shutterstock_383893378.jpg[caption="&copy; Clari Massimiliano / shutterstock.com", title="Ford Mustang Convertible 2012", scaledwidth=80%]
+
+== Stand der Dinge
+
+image::shutterstock_112600436.jpg[caption="&copy; Catalin Petolea / shutterstock.com", scaledwidth=40%]
+//image::shutterstock_112600436.jpg[caption="&copy; Catalin Petolea / shutterstock.com", title="Tractor with trailer in an orchard", scaledwidth=40%]
+
+=== Ein Frontend Beispiel zum Farbsensor
+
+image::tf-vaadin-demo-color.jpg[scaledwidth=75%]
+
+[NOTE.speaker]
+--
+Show Vaadin Sampler
+http://demo.vaadin.com/sampler/
+
+Show Vaadin Charts Sampler
+https://demo.vaadin.com
+--
+
+== Fragestellung
+
+image::architecture/tfmqttv-draft1.jpg[scaledwidth=90%]
+
+== Schritt 1 (Abgrenzung)
+
+image::architecture/tfmqttv-draft2.jpg[scaledwidth=90%]
+
+== Schritt 2 (TinkerForge)
+
+image::architecture/tfmqttv-draft3.jpg[scaledwidth=90%]
+
+== Schritt 3 (Keine Hardware am Server!)
+
+image::architecture/tfmqttv-draft3b.jpg[scaledwidth=90%]
+
+== Schritt 4 (Brick MQTT Proxy)
+
+image::architecture/tfmqttv-draft4.jpg[scaledwidth=90%]
+
+== Schritt 5 (Finaler Aufbau)
+
+image::architecture/tfmqttv.png[scaledwidth=90%]
+
+== DEMO
+
+
+== Persönliches Fazit
+
+[%step]
+* Vergleichsweise teure TinkerForge Bausteine eignen sich zur schnellen Integration.
+* Fokus bleibt auf der Programmierung.
+* MQTT ist für die asynchrone Kommunikation bestens geeignet.
+* Broker ist schnell aufgesetzt, es gibt freie Alternativen.
+* Java-Anbindung ist mit Eclipse Paho sehr einfach.
+
+== Persönliches Fazit (2)
+
+[%step]
+* Vaadin bietet mit den (kostenpflichtigen) Charts sehr ansprechende GUI-Elemente.
+* Es lassen sich damit schnell und unkompliziert Daten visualisieren.
+* Die Programmierwelt Java wurde größtenteils nicht verlassen.
+* Für Hardware, Software, Datentransfer gibt es viel Optimierungspotenzial.
+
+== Ausblick / Weitere Entwicklungen
+
+[%step]
+* Mqtt.v Alpha konsolidieren -> Github
+* Brick-Mqtt-Proxy for Java entwickeln (als 1:1 Port)
+* Device/Bricklet Abstraktion für automatische Charts
+* Mehr Hardware und Charts unterstüzen (Plugin-System)
+* Node-RED Prototyping
+* ...
+
+[NOTE.speaker]
+--
+Node-RED:
+http://nodered.org
+https://jaxenter.de/baukasten-fuer-das-internet-dinge-13532
+http://blog.jforge.online/2015/09/18/tinkerforge-wetter-mit-mqtt-und-node-red/
+
+"A tool for wiring together hardware devices, APIs and online services in new and interesting ways."
+
+* Node-RED MQTT-tf plugins? esp. json parser.
+
+* Mehr MQTT Flexibilität (retained messages, location, QoS security)
+* Dynamic support for multiple proxy instances (instead of choosing hard-coded topic prefix)
+* Alternative Mqtt (Json) Datenformate, Producer/Parser.
+
+Vaadin
+* vaadin-tf plugin
+* spring-boot-vaadin-tf-starter
+* Spring Boot-VAX, more mqtt.v with plugins (TF first)
+
+* Maybe as part of or w/ contributions to mqtt-tf: https://github.com/zambrovski/mqtt-tf
+* Mqtt.fx features nachbauen, aber für Web mit Vaadin endpoint-url:: http://mqttfx.jfx4ee.org/
+* TF Proxy with SNMP format, e.g. zabbix, hw-monitoring with classic monitoring consoles and no further plugins
+--
+
+== Vielen Dank für Eure Aufmerksamkeit
+
+E-mail: klaus@pittig.de
+
+Twitter: @jforge
