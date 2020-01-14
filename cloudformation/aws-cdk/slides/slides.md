@@ -1,18 +1,38 @@
 ---
-title: Foobar
+title: AWS Cloud Development Kito
 separator: <!--h-->
 verticalSeparator: <!--v-->
 theme: solarized
     # black, white, league, sky, beige, simple, serif, blood, night, moon, solarized
+    # https://github.com/hakimel/reveal.js/tree/master/css/theme
+highlightTheme: zenburn
+    # zenburn, github, arduino-light, tomorrow, nord, obsidian, ocean, school-book,
+    # sunburst, solarized-dark, solarized-light, rainbox, xcode, paraiso-light, far, ...
+    # https://github.com/highlightjs/highlight.js/tree/master/src/styles
 revealOptions:
     #transition: none, fade, slide, convex, concave, zoom
     transition: zoom
     slideNumber: true
+    showNotes: false
 
 ---
 <!-- .slide: data-background="images/aws-cdk-ga.jpg" -->
 
 Note: ![cdk-logo](images/aws-cdk-logo.png)
+
+<!--h-->
+
+<!-- .slide: data-background="white" -->
+
+<img style="border: none; box-shadow: none; height: 60%; width: 60%" src="images/iw-fb-wo-stackst-du.png" />
+
+<!--v-->
+
+<!-- .slide: data-background="white" -->
+
+<img style="border: none; box-shadow: none" src="images/iw-logo.svg" />
+
+https://bit.ly/387MHF0
 
 <!--h-->
 
