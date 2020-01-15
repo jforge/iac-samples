@@ -1,7 +1,7 @@
 ---
 title: AWS Cloud Development Kito
-separator: <!--h-->
-verticalSeparator: <!--v-->
+separator: <!--horizontal_slide-->
+verticalSeparator: <!--vertical_slide-->
 theme: solarized
     # black, white, league, sky, beige, simple, serif, blood, night, moon, solarized
     # https://github.com/hakimel/reveal.js/tree/master/css/theme
@@ -16,52 +16,52 @@ revealOptions:
     showNotes: false
 
 ---
-<!-- .slide: data-background="images/aws-cdk-ga.jpg" -->
+<!-- .slide: data-background="images/background/aws-cdk-ga.jpg" -->
 
 Note: ![cdk-logo](images/aws-cdk-logo.png)
 
-<!--h-->
+<!--horizontal_slide-->
 
 <!-- .slide: data-background="white" -->
 
 <img style="border: none; box-shadow: none; height: 60%; width: 60%" src="images/iw-fb-wo-stackst-du.png" />
 
-<!--v-->
+<!--vertical_slide-->
 
 <!-- .slide: data-background="white" -->
 
 <img style="border: none; box-shadow: none" src="images/iw-logo.svg" />
 
-https://bit.ly/387MHF0
+[https://bit.ly/387MHF0](https://bit.ly/387MHF0)
 
-<!--h-->
+<!--horizontal_slide-->
 
-# Agenda
+## Agenda
 
 * Warum Infrastruktur mit Code?
 * Was gibt es bereits für AWS?
 * Prinzip, Lifecycle, Projektaufbau
 * Setup, Demos
-* Testing
-* Tools: Cfn-Disassembler, Jsii
-* Construct Library
+* Testen
+* Weitere Werkzeuge
+* Konstruktbibliotheken
 * Ausblick
 
-<!--h-->
+<!--horizontal_slide-->
 
 ## Infrastructure
 
-Warum Infrastruktur -as- with Code?
+Warum Infrastruktur <del>as</del> with Code?
 
 Note: Intention, Thoughtworks Tech Radar notes about handwritten Cfn
 
-<!--h-->
+<!--horizontal_slide-->
 
 ![cat](images/cat.jpg)
 
 Note: Erwartung und AWS Angebote
 
-<!--v-->
+<!--vertical_slide-->
 
 ## Werkzeuge
 
@@ -75,73 +75,87 @@ Was gibt es bereits für AWS?
 
 Note: From Troposphere to Pulumi, Python-based tools, Cfn modularizers, multi-cloud tools
 
-<!--h-->
+<!--vertical_slide-->
+
+![cdk-project](images/aws-infra-deployment-evolution.png)
+
+<!--horizontal_slide-->
 
 Was ist AWS CDK?
 
-> AWS Cloud Development Kit ist ein Open-Source-Framework für die Softwareentwicklung.
-> Damit lässt sich Cloud-Infrastruktur als Code mit modernen Programmiersprachen definieren und über AWS Cloudformation bereitstellen.
+AWS Cloud Development Kit ist ein Open-Source-Framework für die Softwareentwicklung.
+Damit lässt sich Cloud-Infrastruktur als Code mit modernen Programmiersprachen definieren und über AWS Cloudformation bereitstellen.
 >
 
-<!--h-->
+<!--horizontal_slide-->
 
 ## Funktionsprinzip
 
 ![principle](images/cdk-functional-principle.png)
 
-<!--v-->
+<!--vertical_slide-->
 
 Erwartete Qualität & AWS Abdeckung
 
 ![expected_state](images/shutterstock_383893378.jpg)
 
-<!--v-->
+<!--vertical_slide-->
 
 Aktueller Zustand (stabil) & Abdeckung (teilweise)
 
 ![current_state](images/shutterstock_112600436.jpg)
 
-<!--h-->
+<!--horizontal_slide-->
 
-## Lifecycle
+## Lebenszyklus
 
-<!--h-->
+![cdk-lifecycle](images/aws-cdk-lifecycle.png)
+
+<!--horizontal_slide-->
 
 ## Projektaufbau
 
-<!--h-->
+![cdk-project](images/aws-cdk-project-hierarchy.png)
+
+<!--vertical_slide-->
+
+![cdk-project](images/aws-cdk-project-hierarchy2.png)
+
+<!--horizontal_slide-->
 
 ## Setup
 
-<!--h-->
+<!--horizontal_slide-->
 
 ## Demos
 
-<!--v-->
+<!--vertical_slide-->
 
 ## Demo: Polyglotte blueprints
 
-<!--h-->
+<!--horizontal_slide-->
 
 ## Demo: SPA deployment auf AWS S3
 
 Eine Vue.js App mit API-Zugriff
 
-<!--h-->
+<!--horizontal_slide-->
 
 ## Testing
 
-<!--h-->
+<!--horizontal_slide-->
 
 ## Tools
 
-<!--v-->
+* Frag 1 <!-- .element: class="fragment" -->
+* Frag 2 <!-- .element: class="fragment" -->
+
+<!--vertical_slide-->
 
 ## Tool: Disassembler cdk-dasm
 
 * Cloudformation Disassembler
-* mbler
-* Generate code from Cfn Teampltes
+* Generate code from Cfn Teamplates
 * Not recommended, useful to get started
 * [NPM Package cdk-asm](https://npmjs.com/package/cdk-dasm)
   
@@ -149,7 +163,7 @@ Eine Vue.js App mit API-Zugriff
 cdk-dasm < any-stack-template.json > any-stack.ts
 ```
 
-<!--v-->
+<!--vertical_slide-->
 
 ## Tool: AWS Jsii
 
@@ -165,15 +179,23 @@ npm run build
 npm run package
 ```
 
-<!--h-->
+<!--horizontal_slide-->
 
-## Construct Bibliotheken
+## AWS Construct Library
 
-<!--h-->
+AWS CDK-Konstrukte werden in der AWS Construct Library bereitgestellt.
+
+Sie sind Abstrahierungen von Cloud-Infrastrukturlogik.
+
+Konstrukte können lokal definiert oder in Paketmanagern wie npm, Maven, NuGet oder PyPI veröffentlicht und verteilt werden.
+
+<!--horizontal_slide-->
 
 ## Ausblick
 
-<!--h-->
+<!--horizontal_slide-->
+
+<!-- .slide: data-background="images/background/shutterstock_1173155356.jpg" -->
 
 Vielen Dank für Eure Aufmerksamkeit
 
