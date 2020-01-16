@@ -134,7 +134,7 @@ Was ist AWS CDK?
 
 * AWS Cloud Development Kit ist ein Open-Source-Framework für die Softwareentwicklung <!-- .element: class="fragment" -->
 * Damit wird Cloud-Infrastruktur als Code mit modernen Programmiersprachen definiert und über AWS Cloudformation bereitgestellt <!-- .element: class="fragment" -->
-* Unterstütze Sprachen: TypeScript, JavaScript, Python, Java, and C#/.Net <!-- .element: class="fragment" -->
+* Unterstütze Sprachen: TypeScript, JavaScript, Python, Java, and .NET (C#, F#) <!-- .element: class="fragment" -->
 * Entwickler erstellen in ihrer Sprache wiederverwendbare Komponenten (Constructs) und führen sie in Stacks und Apps zusammen <!-- .element: class="fragment" -->
 
 <!--horizontal_slide-->
@@ -194,7 +194,7 @@ cdk --version
 ## Demos
 
 * Polyglot Blueprints <!-- .element: class="fragment" -->
-* CDK synth, diff, deploy <!-- .element: class="fragment" -->
+* CDK synth, deploy, diff, destroy <!-- .element: class="fragment" -->
 * Sample Stack: API Cors Lambda Crud DynamoDb <!-- .element: class="fragment" -->
 * Amplify App from Github <!-- .element: class="fragment" -->
 * Vue.js SPA Deployment to S3 <!-- .element: class="fragment" -->
@@ -207,12 +207,15 @@ cdk --version
 
 * Aktuelle Sprachbibliotheken und Lifecycle/Dependency Manager
   
-```bash
+```
+mkdir demo && cd demo
 cdk init sample-app language=typescript
-npm run build
+npm install
+npm run build && npm run test
 ```
 
 ```bash
+mkdir demojava && cd demojava
 cdk init lib language=java
 mvn package
 ```
@@ -253,9 +256,9 @@ cdk synth StackOne StackTwo
 
 ## Demo: Amplify Console App
 
-Deploy a static site from Gituhb
+[Amplify Console App](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/amplify-console-app): Deploy a static site from Github
 
-[Amplify Console App](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/amplify-console-app)
+[AWS Amplify](https://aws.amazon.com/de/amplify/console/): Hosting for full stack serverless web apps with continuous deployment
 
 <!--vertical_slide-->
 
