@@ -193,15 +193,17 @@ cdk --version
 
 ## Demos
 
-* Polyglotte Blueprints
-* Sample Stack: API Cors Lambda Crud DynamoDb
-* Vue.js SPA Deployment to S3
-* Sprachsynthese App mit Amazon Polly
-* Brand new [CDK Watchful](https://awscdk.io/packages/cdk-watchful@0.4.3/#/./cdk-watchful-readme)
+* Polyglot Blueprints <!-- .element: class="fragment" -->
+* CDK synth, diff, deploy <!-- .element: class="fragment" -->
+* Sample Stack: API Cors Lambda Crud DynamoDb <!-- .element: class="fragment" -->
+* Amplify App from Github <!-- .element: class="fragment" -->
+* Vue.js SPA Deployment to S3 <!-- .element: class="fragment" -->
+* Sprachsynthesis App with Amazon Polly <!-- .element: class="fragment" -->
+* Brand new: CDK Watchful Construct Library <!-- .element: class="fragment" -->
 
 <!--vertical_slide-->
 
-## Demo: Polyglotte blueprints
+## Polyglotte blueprints
 
 * Aktuelle Sprachbibliotheken und Lifecycle/Dependency Manager
   
@@ -214,12 +216,6 @@ npm run build
 cdk init lib language=java
 mvn package
 ```
-
-<!--vertical_slide-->
-
-## Demo: Sample Stack on Github
-
-[API-Cors-Lambda-Crud-DynamoDb Sample](https://github.com/aws-samples/aws-cdk-examples/blob/master/typescript/api-cors-lambda-crud-dynamodb/index.ts)
 
 <!--vertical_slide-->
 
@@ -243,21 +239,50 @@ cdk synth StackOne StackTwo
 
 <!--vertical_slide-->
 
-## Demo: SPA deployment auf AWS S3
+## Sample: CDK MultiStack Diff
+
+![cdk-diff-sample](images/cdk-diff-multistack.png)
+
+<!--horizontal_slide-->
+
+## Demo: Sample Stack on Github
+
+[API-Cors-Lambda-Crud-DynamoDb Sample](https://github.com/aws-samples/aws-cdk-examples/blob/master/typescript/api-cors-lambda-crud-dynamodb/index.ts)
+
+<!--vertical_slide-->
+
+## Demo: Amplify Console App
+
+Deploy a static site from Gituhb
+
+[Amplify Console App](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/amplify-console-app)
+
+<!--vertical_slide-->
+
+## Demo: SPA deployment to AWS S3
 
 [Eine Vue.js App mit API-Zugriff](http://gcme-search.s3-website.eu-central-1.amazonaws.com/)
 
 <!--vertical_slide-->
 
-## Demo: Sprachsynthese App mit Amazon Polly
+## Demo: Sprachsynthesis App with Amazon Polly
 
 [Build a Text to Speech App with Amazon Polly](https://aws.amazon.com/de/blogs/machine-learning/build-your-own-text-to-speech-applications-with-amazon-polly/)
+
+<!--vertical_slide-->
+
+## Demo: CDK Watchful 
+
+Monitor CDK Apps
+
+[Github -> CDK Watchful](https://awscdk.io/packages/cdk-watchful@0.4.3/#/./cdk-watchful-readme)
+
 
 <!--horizontal_slide-->
 
 ## Testing
 
-Beispiel Jest mit Snapshots
+Sample: Jest mit Snapshots
 
 ```js
 describe('New DynamoDb Resource can be setup', () => {
@@ -276,6 +301,16 @@ describe('New DynamoDb Resource can be setup', () => {
   });
 }
 ```
+
+<!--vertical_slide-->
+
+## Testing
+
+Sample: Snapshot Test Result
+
+![snapshot-test](images/cdk-snapshot-test.png)
+
+
 
 <!--horizontal_slide-->
 
@@ -356,7 +391,7 @@ Note: Lambda@Edge issues - timing with cert validation, route53 Alias Record, cl
 
 * [Cloudformation Disassembler](https://github.com/aws/aws-cdk/tree/master/packages/cdk-dasm)
 * Erzeugt Typescript code aus Cfn Templates
-* Experimentell, nicht empfehlen für die Produktion
+* Experimentell, nicht empfohlen für Produktivsysteme
 * Nützlich zum Starten mit CDK
 * [NPM Package cdk-asm](https://npmjs.com/package/cdk-dasm)
   
@@ -416,6 +451,7 @@ npm run package
 
 ## Ausblick
 
+* [Aktuelles Release](https://github.com/aws/aws-cdk/releases/)
 * CDK ist stabil und nutzbar <!-- .element: class="fragment" -->
 * Einige Konstrukte sind noch experimentell <!-- .element: class="fragment" -->
 * Es gibt ein Angebot an 3rd Party Konstrukten (z.B. DestroyableBucket) <!-- .element: class="fragment" -->
