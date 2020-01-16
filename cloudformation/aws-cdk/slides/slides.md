@@ -416,7 +416,6 @@ npm run package
 
 ## Ausblick
 
-* Aktuell: Version 1.20 <!-- .element: class="fragment" -->
 * CDK ist stabil und nutzbar <!-- .element: class="fragment" -->
 * Einige Konstrukte sind noch experimentell <!-- .element: class="fragment" -->
 * Es gibt ein Angebot an 3rd Party Konstrukten (z.B. DestroyableBucket) <!-- .element: class="fragment" -->
