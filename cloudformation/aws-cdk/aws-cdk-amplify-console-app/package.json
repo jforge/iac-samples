@@ -4,6 +4,7 @@
   "description": "Amplify Console App static site from GitHub repo, with master branch trigger",
   "private": true,
   "scripts": {
+    "clean": "ts-clean -e .d.ts,.js,.js.map",
     "build": "tsc",
     "watch": "tsc -w",
     "cdk": "cdk"
@@ -15,6 +16,7 @@
   "license": "MIT-0",
   "devDependencies": {
     "@types/node": "13.1.8",
+    "ts-clean": "^1.0.3",
     "typescript": "~3.7.5"
   },
   "dependencies": {
