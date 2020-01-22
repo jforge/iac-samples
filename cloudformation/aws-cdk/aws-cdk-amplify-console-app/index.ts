@@ -36,8 +36,10 @@ export class AmplifyConsoleAppCdkStack extends cdk.Stack {
       branchName: 'master'
     });
 
+    const appUrl: string = 'https://'.concat([amplifyBranch.branchName, amplifyApp.attrAppId, 'amplifyapp.com'].join('.'));
+
     new CfnOutput(this, "amplifyConsoleAppUrl", {
-      value: 'https://'.concat(amplifyBranch.branchName, '.', amplifyApp.attrAppId, '.amplifyapp.com')
+      value: appUrl
     });
 
   }
