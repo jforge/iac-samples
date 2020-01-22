@@ -17,7 +17,8 @@
   "devDependencies": {
     "@types/node": "13.1.8",
     "ts-clean": "^1.0.3",
-    "typescript": "~3.7.5"
+    "typescript": "~3.7.5",
+    "aws-cdk": "^1.21.1"
   },
   "dependencies": {
     "@aws-cdk/aws-amplify": "^1.21.1",
