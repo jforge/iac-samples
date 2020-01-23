@@ -20,43 +20,6 @@ revealOptions:
 
 <!--horizontal_slide-->
 
-<!-- .slide: data-background="white" -->
-
-<img style="border: none; box-shadow: none; height: 60%; width: 60%" src="images/iw-fb-wo-stackst-du.png" />
-
-Note: Die Immowelt Hamburg GmbH gehört mit der Immowelt AG zur Immowelt Gruppe,
-einer 100%igen Axel Springer Tochter.
-Wir arbeiten als Spezialisten für die digitale Immobilienvermarktung an der Weiterentwicklung der reichweitenstarken Immobilienportale immonet.de und immowelt.de,
-und erschaffen zurzeit die nächste Plattform-Generation. Darüber hinaus betreibt Immowelt Portale wie bauen.de und umzugsauktion.de und bietet eine CRM-Software für die Immobilienwirtschaft an.
-
-Wir suchen motivierte, erfahrene und talentierte Mitarbeiter, die an die Chancen von Cloud Computing, Data Science und Mobile Apps glauben und neuartige Technologien verwenden und mitgestalten wollen.
-Im Umfeld der AVIV Gruppe als habt Ihr auch die Chance, international mitzuarbeiten.
-
-Englisch
-
-Immowelt Hamburg together with Immowelt Corp. is part of Immowelt Group, a 100% affiliate of Axel Springer.
-As specialists for the digital real estate marketing we are working on the advancement of the wide-coverage real estate portal immonet.de and immowelt.de, and are currently creating the next generation platform.
-Beyond that Immowelt runs portals like bauen.de and umzugsauktion.de,
-and offers a CRM software for the real estate industry.
-
-We are looking for motivated, experienced and talented employees believing in the odds of
-cloud computing, data science and mobile apps, and want to use and help shape new technologies.
-In context of the AVIV group you also have the chance to work internationally.
-
-<!--vertical_slide-->
-
-<!-- .slide: data-background="white" -->
-
-<img style="border: none; box-shadow: none" src="images/iw-logo.svg" />
-
-https://bit.ly/387MHF0
-
-Our Tech Stack:
-
-https://stackshare.io/immowelt-group/immowelt-hamburg-gmbh
-
-<!--horizontal_slide-->
-
 ## Agenda
 
 * Warum Infrastruktur mit Code? <!-- .element: class="fragment" -->
@@ -116,11 +79,15 @@ Note: Erwartung und AWS Angebote
 
 Was gibt es bereits für AWS?
 
-* Pulumi (multi cloud)
-* Troposhere
-* Sceptre
-* Cfn Modules
-* ...
+* Mit gewohnten Programmiersprachen:
+  * Pulumi (multi cloud)
+  * Troposhere
+  * Sceptre
+* Deklarativ, ohne Programmiersprachen:
+  * Cfn Modules,
+  * Stacker,
+  * Stack Deployment Tool
+  * Terraform
 
 Note: From Troposphere to Pulumi, Python-based tools, Cfn modularizers, multi-cloud tools
 
