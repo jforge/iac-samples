@@ -1,0 +1,7 @@
+.env
+.vscode
+*.DS_Store
+._*
+node_modules/
+.aws-sam
+.toml
