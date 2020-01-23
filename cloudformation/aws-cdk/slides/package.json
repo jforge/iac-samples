@@ -1,0 +1,14 @@
+{
+  "name": "aws-cdk-slides",
+  "version": "1.0.0",
+  "scripts": {
+    "preexport:pdf": "cp slides.md slides2print.md && replace-in-file '/class=\"fragment\"/g' ' ' slides2print.md --isRegex",
+    "export:pdf": "reveal-md slides2print.md -w --theme white --print dist/aws-cdk-slides-202001.pdf",
+    "postexport:pdf": "rm slides2print.md",
+    "name-it-infracoders": "mv dist/aws-cdk-slides-202001.pdf dist/aws-cdk-slides-202001-infracoders-hh.pdf"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "replace-in-file": "^5.0.2"
+  }
+}
