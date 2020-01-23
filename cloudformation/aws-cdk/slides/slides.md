@@ -1,22 +1,30 @@
 ---
 title: AWS Cloud Development Kito
+author: Klaus Pittig <klaus@pittig.de>
 separator: <!--horizontal_slide-->
 verticalSeparator: <!--vertical_slide-->
 theme: solarized
-    # black, white, league, sky, beige, simple, serif, blood, night, moon, solarized
-    # https://github.com/hakimel/reveal.js/tree/master/css/theme
+  # black, white, league, sky, beige, simple, serif, blood, night, moon, solarized
+  # https://github.com/hakimel/reveal.js/tree/master/css/theme
 highlightTheme: zenburn
-    # zenburn, github, arduino-light, tomorrow, nord, obsidian, ocean, school-book,
-    # sunburst, solarized-dark, solarized-light, rainbox, xcode, paraiso-light, far, ...
-    # https://github.com/highlightjs/highlight.js/tree/master/src/styles
+  # zenburn, github, arduino-light, tomorrow, nord, obsidian, ocean, school-book,
+  # sunburst, solarized-dark, solarized-light, rainbox, xcode, paraiso-light, far, ...
+  # https://github.com/highlightjs/highlight.js/tree/master/src/styles
 revealOptions:
-    #transition: none, fade, slide, convex, concave, zoom
-    transition: zoom
-    slideNumber: true
-    showNotes: false
+  #transition: none, fade, slide, convex, concave, zoom
+  transition: zoom
+  slideNumber: true
+  showNotes: false
 
 ---
-<!-- .slide: data-background="images/background/aws-cdk-ga.jpg" -->
+<!-- .slide: data-background="images/background/AWS-Cloud-Development-Kit-header.jpg" -->
+
+AWS Cloud Development Kit <!-- .element: style="color:white" -->
+
+![aws-cloud](images/AWS-Cloud-alt_light-bg@4x.png) <!-- .element: style="background:none; border:none; box-shadow:none;" -->
+![aws-cloud](images/AWS-Cloud-Development-Kit@4x.png) <!-- .element: style="background:none; border:none; box-shadow:none; width:20%; margin:20pt" -->
+![aws-cloud](images/AWS-CloudFormation@4x.png) <!-- .element: style="background:none; border:none; box-shadow:none; width:20%; margin:20pt" -->
+
 
 <!--horizontal_slide-->
 
@@ -80,14 +88,14 @@ Note: Erwartung und AWS Angebote
 Was gibt es bereits für AWS?
 
 * Mit gewohnten Programmiersprachen:
-  * Pulumi (multi cloud)
-  * Troposhere
-  * Sceptre
+  * Pulumi (multi cloud, polyglott) <!-- .element: class="fragment" -->
+  * Troposhere, Sceptre (Python) <!-- .element: class="fragment" -->
+  * ...? <!-- .element: class="fragment" -->
 * Deklarativ, ohne Programmiersprachen:
-  * Cfn Modules,
-  * Stacker,
-  * Stack Deployment Tool
-  * Terraform
+  * Cloudformation, Serverless, SAM <!-- .element: class="fragment" -->
+  * Cfn Modules, Stacker, Stack Deployment Tool<!-- .element: class="fragment" -->
+  * Terraform  <!-- .element: class="fragment" -->
+  * ...?  <!-- .element: class="fragment" -->
 
 Note: From Troposphere to Pulumi, Python-based tools, Cfn modularizers, multi-cloud tools
 
@@ -108,39 +116,58 @@ Was ist AWS CDK?
 
 ## Funktionsprinzip
 
-![principle](images/cdk-functional-principle.png)
+![principle](images/aws-cdk-functional-principle.png)
 
 <!--vertical_slide-->
 
 Erwartete Qualität & AWS Abdeckung
 
-![expected_state](images/shutterstock_383893378.jpg)
+![expected_state](images/shutterstock_383893378.jpg) <!-- .element: width="80%" -->
 
 <!--vertical_slide-->
 
 Aktueller Zustand (stabil) & Abdeckung (teilweise)
 
-![current_state](images/shutterstock_112600436.jpg)
+![current_state](images/shutterstock_112600436.jpg) <!-- .element: width="80%" -->
 
 <!--horizontal_slide-->
 
 ## Lebenszyklus
 
-![cdk-lifecycle](images/aws-cdk-lifecycle.png)
+![cdk-lifecycle](images/aws-cdk-lifecycle.png) <!-- .element: width="60%" -->
 
 <!--horizontal_slide-->
 
-## Projektaufbau
+## Projektüberblick
 
-![cdk-project](images/cdk-app-stacks.png)
+<!-- .slide: data-background="white" -->
+
+![cdk-project](images/aws-cdk-app-stacks.png) <!-- .element: style="background; border:none; box-shadow:none;" -->
+
+<!--horizontal_slide-->
+
+## Projekthierarchie
+
+![cdk-project](images/aws-cdk-project-hierarchy.png) <!-- .element: width="80%" -->
 
 <!--vertical_slide-->
 
-![cdk-project](images/aws-cdk-project-hierarchy.png)
+## Projekthierarchie
+
+* App - Projektursprung, stellt Stacks bereit <!-- .element: class="fragment" -->
+  * Environment - Multi-Account, Multi-Region <!-- .element: class="fragment" -->
+* Stack - Bereitstellbare Einheit einer CDK App <!-- .element: class="fragment" -->
+* Construct - AWS Resource Repräsentation <!-- .element: class="fragment" -->
+  * High Level (Bibliothek wie VPC oder CustomResource) <!-- .element: class="fragment" -->
+  * Low level (CfnResources) wie Subnets, Gateways etc. <!-- .element: class="fragment" -->
 
 <!--vertical_slide-->
 
-![cdk-project](images/aws-cdk-project-hierarchy2.png)
+## Projekthierarchie
+
+<!-- .slide: data-background="white" -->
+
+![cdk-project](images/aws-cdk-project-layers.png) <!-- .element: style="background; border:none; box-shadow:none; width:70%" -->
 
 <!--horizontal_slide-->
 
@@ -211,7 +238,7 @@ cdk synth StackOne StackTwo
 
 ## Sample: CDK MultiStack Diff
 
-![cdk-diff-sample](images/cdk-diff-multistack.png)
+![cdk-diff-sample](images/aws-cdk-diff-multistack.png)
 
 <!--horizontal_slide-->
 
@@ -247,7 +274,6 @@ Monitor CDK Apps
 
 [Github -> CDK Watchful](https://awscdk.io/packages/cdk-watchful@0.4.3/#/./cdk-watchful-readme)
 
-
 <!--horizontal_slide-->
 
 ## Testing
@@ -269,7 +295,7 @@ describe('New DynamoDb Resource can be setup', () => {
       BillingMode: "PAY_PER_REQUEST"
     }));
   });
-}
+}o
 ```
 
 <!--vertical_slide-->
@@ -278,8 +304,7 @@ describe('New DynamoDb Resource can be setup', () => {
 
 Sample: Snapshot Test Result
 
-![snapshot-test](images/cdk-snapshot-test.png)
-
+![snapshot-test](images/aws-cdk-snapshot-test.png)
 
 
 <!--horizontal_slide-->
@@ -325,10 +350,10 @@ script {
 
 * Thoughtworks hat recht (vermeide händische Cloudformation Vorlagen)  <!-- .element: class="fragment" -->
 * Steile Lernkurve, schnelle Einarbeitung  <!-- .element: class="fragment" -->
-* Bequemes Arbeiten mit TypeScript für AWS Infrastruktur  <!-- .element: class="fragment" -->
+* Bequemes Arbeiten z.B. mit TypeScript <!-- .element: class="fragment" -->
 * Keine Hürden für sauberes Testen <!-- .element: class="fragment" -->
-* Staging, Cross Region und Cross Account deployments inkl. CI/CD pipeline möglich. <!-- .element: class="fragment" -->
-* Nutze Docker Container mit AWS SDK, CDK und Typescript toolstack <!-- .element: class="fragment" -->
+* Staging, Cross Region und Cross Account Deployments inkl. CI/CD pipeline möglich. <!-- .element: class="fragment" -->
+* Nutze Docker Container mit AWS SDK, CDK und Typescript Toolstack <!-- .element: class="fragment" -->
 * und mehr... <!-- .element: class="fragment" -->
 
 Note: https://github.com/robertd/alpine-aws-cdk
@@ -425,10 +450,10 @@ npm run package
 * CDK ist stabil und nutzbar <!-- .element: class="fragment" -->
 * Einige Konstrukte sind noch experimentell <!-- .element: class="fragment" -->
 * Es gibt ein Angebot an 3rd Party Konstrukten (z.B. DestroyableBucket) <!-- .element: class="fragment" -->
-* Das Ökosystem wächst <!-- .element: class="fragment" -->
+* Ökosystem, Stabilität & Abdeckung wachsen <!-- .element: class="fragment" -->
 * Multi-Cloud Tools wie Pulumi sind eine Alternative  <!-- .element: class="fragment" -->
-* und mehr... <!-- .element: class="fragment" -->
-* ... zur Produktion würde ich noch Terraform bevorzugen <!-- .element: class="fragment" -->
+* aber...
+* ...zur Produktion würde ich noch Terraform bevorzugen<!-- .element: class="fragment" -->
 
 <!--horizontal_slide-->
 
