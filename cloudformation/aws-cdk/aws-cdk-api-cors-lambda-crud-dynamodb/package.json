@@ -1,26 +1,22 @@
 {
   "name": "api-lambda-crud-dynamodb",
   "version": "1.0.0",
-  "description": "Running an API Gateway with four Lambdas to do CRUD operations on DynamoDB",
+  "description": "Running an API Gateway with Lambdas to do CRUD on DynamoDB",
   "private": true,
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "cdk": "cdk"
   },
-  "author": {
-    "name": "Aleksandar Simovic <alexander.simovic@gmail.com>",
-    "url": "https://serverless.pub"
-  },
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^12.12.7",
-    "typescript": "^3.7.2"
+    "@types/node": "^13.5.0",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "*",
-    "@aws-cdk/aws-dynamodb": "*",
-    "@aws-cdk/aws-lambda": "*",
-    "@aws-cdk/core": "*"
+    "@aws-cdk/aws-apigateway": "^1.22.0",
+    "@aws-cdk/aws-dynamodb": "^1.22.0",
+    "@aws-cdk/aws-lambda": "^1.22.0",
+    "@aws-cdk/core": "^1.22.0"
   }
 }
