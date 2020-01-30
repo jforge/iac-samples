@@ -4,6 +4,7 @@
   "description": "Running an API Gateway with Lambdas to do CRUD on DynamoDB",
   "private": true,
   "scripts": {
+    "clean": "ts-clean -e .d.ts,.js,.js.map",
     "build": "tsc",
     "watch": "tsc -w",
     "cdk": "cdk"
@@ -11,6 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^13.5.0",
+    "ts-clean": "^1.0.3",
     "typescript": "^3.7.5"
   },
   "dependencies": {

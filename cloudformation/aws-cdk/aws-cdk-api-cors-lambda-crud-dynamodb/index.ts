@@ -1,4 +1,4 @@
-import apigateway = require('@aws-cdk/aws-apigateway'); 
+import apigateway = require('@aws-cdk/aws-apigateway');
 import dynamodb = require('@aws-cdk/aws-dynamodb');
 import lambda = require('@aws-cdk/aws-lambda');
 import cdk = require('@aws-cdk/core');
@@ -7,23 +7,25 @@ export class ApiLambdaCrudDynamoDBStack extends cdk.Stack {
   constructor(app: cdk.App, id: string) {
     super(app, id);
 
-    const dynamoTable = new dynamodb.Table(this, 'items', {
+    const dynamoTable = new dynamodb.Table(this, 'apigw-crud-sample-items', {
       partitionKey: {
         name: 'itemId',
         type: dynamodb.AttributeType.STRING
       },
-      tableName: 'items',
+      tableName: 'apigw-crud-sample-items',
 
       // The default removal policy is RETAIN, which means that cdk destroy will not attempt to delete
-      // the new table, and it will remain in your account until manually deleted. By setting the policy to 
+      // the new table, and it will remain in your account until manually deleted. By setting the policy to
       // DESTROY, cdk destroy will delete the table (even if it has data in it)
       removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production code
     });
 
     const getOneLambda = new lambda.Function(this, 'getOneItemFunction', {
-      code: new lambda.AssetCode('src'),
+      code: new lambda.AssetCode('src', {
+        exclude: ['*.ts'],
+      }),
       handler: 'get-one.handler',
-      runtime: lambda.Runtime.NODEJS_8_10,
+      runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TABLE_NAME: dynamoTable.tableName,
         PRIMARY_KEY: 'itemId'
@@ -31,9 +33,11 @@ export class ApiLambdaCrudDynamoDBStack extends cdk.Stack {
     });
 
     const getAllLambda = new lambda.Function(this, 'getAllItemsFunction', {
-      code: new lambda.AssetCode('src'),
+      code: new lambda.AssetCode('src', {
+        exclude: ['*.ts'],
+      }),
       handler: 'get-all.handler',
-      runtime: lambda.Runtime.NODEJS_8_10,
+      runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TABLE_NAME: dynamoTable.tableName,
         PRIMARY_KEY: 'itemId'
@@ -41,9 +45,11 @@ export class ApiLambdaCrudDynamoDBStack extends cdk.Stack {
     });
 
     const createOne = new lambda.Function(this, 'createItemFunction', {
-      code: new lambda.AssetCode('src'),
+      code: new lambda.AssetCode('src', {
+        exclude: ['*.ts'],
+      }),
       handler: 'create.handler',
-      runtime: lambda.Runtime.NODEJS_8_10,
+      runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TABLE_NAME: dynamoTable.tableName,
         PRIMARY_KEY: 'itemId'
@@ -51,9 +57,11 @@ export class ApiLambdaCrudDynamoDBStack extends cdk.Stack {
     });
 
     const updateOne = new lambda.Function(this, 'updateItemFunction', {
-      code: new lambda.AssetCode('src'),
+      code: new lambda.AssetCode('src', {
+        exclude: ['*.ts'],
+      }),
       handler: 'update-one.handler',
-      runtime: lambda.Runtime.NODEJS_8_10,
+      runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TABLE_NAME: dynamoTable.tableName,
         PRIMARY_KEY: 'itemId'
@@ -61,15 +69,17 @@ export class ApiLambdaCrudDynamoDBStack extends cdk.Stack {
     });
 
     const deleteOne = new lambda.Function(this, 'deleteItemFunction', {
-      code: new lambda.AssetCode('src'),
+      code: new lambda.AssetCode('src', {
+        exclude: ['*.ts'],
+      }),
       handler: 'delete-one.handler',
-      runtime: lambda.Runtime.NODEJS_8_10,
+      runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TABLE_NAME: dynamoTable.tableName,
         PRIMARY_KEY: 'itemId'
       }
     });
-    
+
     dynamoTable.grantReadWriteData(getAllLambda);
     dynamoTable.grantReadWriteData(getOneLambda);
     dynamoTable.grantReadWriteData(createOne);
@@ -124,7 +134,7 @@ export function addCorsOptions(apiResource: apigateway.IResource) {
         'method.response.header.Access-Control-Allow-Methods': true,
         'method.response.header.Access-Control-Allow-Credentials': true,
         'method.response.header.Access-Control-Allow-Origin': true,
-      },  
+      },
     }]
   })
 }
