@@ -13,9 +13,10 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.22.0",
+    "@types/aws-lambda": "*",
     "@types/jest": "^24.9.1",
     "@types/node": "13.5.0",
-    "aws-cdk": "^1.22.0s",
+    "aws-cdk": "^1.22.0",
     "jest": "^25.1.0",
     "ts-clean": "^1.0.3",
     "ts-jest": "^25.0.0",
@@ -23,6 +24,9 @@
     "typescript": "~3.7.5"
   },
   "dependencies": {
+    "@aws-cdk/aws-sns": "^1.22.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.22.0",
+    "@aws-cdk/aws-sqs": "^1.22.0",
     "@aws-cdk/core": "^1.22.0",
     "source-map-support": "^0.5.16"
   }
