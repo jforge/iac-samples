@@ -16,10 +16,10 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/node": "^12.12.18",
+    "@types/node": "^13.7.0",
     "ts-clean": "^1.0.3",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.3"
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
     "@aws-cdk/aws-events": "*",
