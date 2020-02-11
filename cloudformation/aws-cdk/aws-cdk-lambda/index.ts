@@ -9,11 +9,20 @@ export class LambdaCronStack extends cdk.Stack {
   constructor(app: cdk.App, id: string) {
     super(app, id);
 
+    /*
     const lambdaFn = new lambda.Function(this, 'Singleton', {
       code: new lambda.InlineCode(fs.readFileSync('lambda-handler.py', { encoding: 'utf-8' })),
       handler: 'index.main',
       timeout: cdk.Duration.seconds(300),
       runtime: lambda.Runtime.PYTHON_2_7,
+    });
+
+    */
+    const lambdaFn = new lambda.Function(this, 'Singleton', {
+      code: new lambda.InlineCode(fs.readFileSync('lambda-handler.js', { encoding: 'utf-8' })),
+      handler: 'index.handler',
+      timeout: cdk.Duration.seconds(300),
+      runtime: lambda.Runtime.NODEJS_10_X,
     });
 
     // Run every day at 6PM UTC
