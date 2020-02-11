@@ -1,6 +1,22 @@
 
 # Infrastructure as Code samples
 
+## Infrastructure is/with Code
+
+Some notes about "coding" infrastructure instead of using markup-like yaml, json or low-level cloud-provider template languages. This becomes more and more interesting since 2019, especially with AWS Cloud Development Kit, Pulumi etc.
+
+Purpose: Learn to create Multi-Cloud native applications including their infrastructure with one preferred programming language.
+
+### Advantages
+
+Do not learn markup languages changing over the years, do not lock yourself into cloud-provider specific languages (even one can't avoid cloud-provider specific SDKs), just use your or your team's preferred programming language for everything. Using a "regular" programming language allows to use "natural" logic, unit-testing, modularization... all the cool clean-code stuff we learned as best practice can be applied.
+
+### Possible Disadvantages
+
+You may need to learn a new SDK/API and live with lack of completeness concerning the cloud provider new hot stuff. And your "preferred" programming language for everything need to be one of these depending on toolkit and time: .NET Core Languages (C#, F#...) Go, Java, Python, Typescript/Javascript (alphabetical order, not weighted by value). There may also be "other" types of erroneous behaviour compared to a pure descriptive template language. Your modularization concept may not match the "programmed" one.
+
+
+
 ## IaC samples for the Amazon Cloud Services
 
 Infrastructure as Code examples demonstrating 
@@ -12,13 +28,23 @@ The following list raises no claims on completeness (please open an issue or a p
 
 ### Cloudformation
 
-Handwritten [Cloudformation](https://aws.amazon.com/de/cloudformation/) templates is [classified as HOLD on the Thoughtworks Tech Radar](https://www.thoughtworks.com/de/radar/tools/handwritten-cloudformation) for good reasons.
-
 Writing Cloudformation Templates for complex infrastructure is well known and works like a charm... and it can be configuration hell depending on the complexity of your infrastructure.
+
+Beside the template language for Cloudformation driven Infrastructure, AWS offers the Cloud Development Kit (CDK) with Typescript as the default language with full AWS SDK support.
+
+Handwritten [Cloudformation](https://aws.amazon.com/de/cloudformation/) templates is [classified as HOLD on the Thoughtworks Tech Radar](https://www.thoughtworks.com/de/radar/tools/handwritten-cloudformation) for good reasons.
 
 In the end, one may state: "We want Infrastructure as Code, not Infrastructure as Text" (Thanks to [Jack](https://twitter.com/jforge/status/1183663187037773824) for this one).
 
-In short the following tools finally produce Cloudformation Templates, provide (structural) shortcuts to Cloudformation and offer high-level development capabilities.
+The following tools finally produce Cloudformation Templates, provide (structural) shortcuts to Cloudformation and offer high-level development capabilities.
+
+#### SAM
+
+#### Serverless
+
+If you focus on serverless computing, use Serverless. This simplifies a lot, but may not be enough. If it's not enough for your use-case, DO NOT mix this, instead use a higher level toolkit.
+
+
 
 #### AWS Cloud Development Kit
 
@@ -69,7 +95,7 @@ This is part of the Open Source projects of [Capital One](https://developer.capi
 
 [Terraform](https://www.terraform.io) may be rated as some incumbent of IaC tools.
 
-It's widely adopted, and with a least the [Hashicorp Language (HCL)](https://www.terraform.io/docs/configuration/index.html), [modularization](https://www.terraform.io/docs/configuration/modules.html) aspects and the like. 
+It has been the best tool for infrastructure for years now, is widely adopted, written with the [Hashicorp Language (HCL)](https://www.terraform.io/docs/configuration/index.html), offers understandable [modularization](https://www.terraform.io/docs/configuration/modules.html), supports multiple cloud providers, and the descriptors appear tidier than e.g. pure Cloudformatin templates.
 
 Terraform is a well-known good practice to work on infrastructure and widely integrated with other tools and cloud environments, see for example the [Pulumi Terraform Bridge](https://github.com/pulumi/pulumi-terraform).
 
@@ -89,6 +115,18 @@ Which in short summarizes today's developer orientiation concerning cloud native
 
 See [Github](https://github.com/pulumi/) to get started.
 
+See [Heise about Pulumi 1.0 (2019-09)](https://www.heise.de/developer/meldung/Infrastructure-as-Code-Die-Plattform-Pulumi-erreicht-Version-1-0-4516570.html).
+
+
+### OpenWhisk
+
+This is an Open Source Could platform, coming as an extraction from the IBM Cloud universe.
+
+See [Apache OpenWhisk](https://openwhisk.apache.org/) for details.
+
+See [IBM Cloud Functions](https://www.ibm.com/de-de/cloud/functions) to get started.
+
+
 #### More on IaC
 
 A (non-curated) list of classic Infrastructure as Code tools and discussion about IaC can be found in a [Thorntech article](https://www.thorntech.com/2018/04/15-infrastructure-as-code-tools/).
@@ -97,7 +135,11 @@ Another approach and alternative platform is [Cloudfoundry](https://www.cloudfou
 
 > Cloud Foundry is an open source, multi-cloud application platform as a service governed by the Cloud Foundry Foundation.
 
-Also see [More cloud tools and helpers](https://github.com/cloudtools).
+Also see:
+- [More cloud tools and helpers](https://github.com/cloudtools).
+- [Popular open source tools for managing the cloud](https://sudonull.com/posts/6606-Popular-open-source-part-two-5-tools-for-managing-the-cloud)
+
+
 
 ## IaC samples for the Microsoft Azure Services
 
