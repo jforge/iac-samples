@@ -79,6 +79,7 @@ export const handler: Handler = (event: any, context: Context, callback: Callbac
     }
   };
 
+  /*
   db.get(params, (err: any, data: any) => {
     if (err) {
       context.succeed({ success: false, error: err });
@@ -118,4 +119,5 @@ export const handler: Handler = (event: any, context: Context, callback: Callbac
       });
     }
   });
+  */
 };

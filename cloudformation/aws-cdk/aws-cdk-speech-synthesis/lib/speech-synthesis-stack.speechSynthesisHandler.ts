@@ -5,8 +5,8 @@ const rekognition: Rekognition = new Rekognition({ apiVersion: '2016-06-27' })
 const polly: Polly = new Polly()
 const s3: S3 = new S3({ signatureVersion: 'v4' })
 
-const contentBucket: string = process.env.CONTENT_BUCKET || ''
-const dynamoTableName: string = process.env.DYNAMO_TABLE || ''
+const contentBucket: string = process.env.CONTENT_BUCKET || 'speech-synthesis-storage'
+const dynamoTableName: string = process.env.DYNAMO_TABLE || 'Speech-Synthesis-Data'
 const voiceId: string = 'Mads'
 const noText: string = "Nothing found"
 const outputFolder: string = "output/"
@@ -59,6 +59,7 @@ async function readText(text: string, voiceId: string, outputObjectKey: string) 
     return outputObjectKey
   } else {
     console.error(`audiostream is not a buffer`)
+    return undefined
   }
 }
 
@@ -90,7 +91,7 @@ async function rekognizeText(rawObjectKey: string) {
   const bytes = await getBase64BufferFromS3(rawObjectKey)
   if (!bytes) return noText
   let text: any = await detectTextFromBytes(bytes)
-  text = text && text.TextDetections ? text.TextDetections.map(i => i.DetectedText).join(" ") : noText
+  text = text && text.TextDetections ? text.TextDetections.map((i: { DetectedText: any; }) => i.DetectedText).join(" ") : noText
   return text
 }
 
