@@ -2,32 +2,35 @@
   "name": "aws-cdk-speech-synthesis",
   "version": "0.1.0",
   "bin": {
-    "aws-cdk-speech-synthesis": "bin/aws-cdk-speech-synthesis.js"
+    "aws-cdk-speech-synthesis": "bin/speech-synthesis-app.js"
   },
   "scripts": {
     "clean": "ts-clean -e .d.ts,.js,.js.map",
+    "clean-build": "ts-clean -e .d.ts,.js,.js.map && tsc",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.22.0",
+    "@aws-cdk/assert": "^1.23.0",
     "@types/aws-lambda": "*",
-    "@types/jest": "^24.9.1",
-    "@types/node": "13.5.0",
-    "aws-cdk": "^1.22.0",
+    "@types/jest": "^25.1.2",
+    "@types/node": "13.7.0",
+    "aws-cdk": "^1.23.0",
     "jest": "^25.1.0",
+    "parcel": "^1.12.4",
     "ts-clean": "^1.0.3",
-    "ts-jest": "^25.0.0",
+    "ts-jest": "^25.2.0",
     "ts-node": "^8.6.2",
     "typescript": "~3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-sns": "^1.22.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.22.0",
-    "@aws-cdk/aws-sqs": "^1.22.0",
-    "@aws-cdk/core": "^1.22.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.23.0",
+    "@aws-cdk/aws-sns": "^1.23.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.23.0",
+    "@aws-cdk/aws-sqs": "^1.23.0",
+    "@aws-cdk/core": "^1.23.0",
     "source-map-support": "^0.5.16"
   }
 }
