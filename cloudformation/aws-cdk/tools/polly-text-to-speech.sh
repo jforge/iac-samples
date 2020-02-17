@@ -2,8 +2,8 @@
 #
 # Generate Speech MP3 from (SSML'ed) Text
 #
-# Polly Languages: https://docs.aws.amazon.com/de_de/polly/latest/dg/SupportedLanguage.html
 # Polly CLI, SSML: https://docs.aws.amazon.com/polly/latest/dg/ssml-synthesize-speech-cli.html
+# Polly Languages: https://docs.aws.amazon.com/de_de/polly/latest/dg/SupportedLanguage.html
 #
 
 SAMPLE_TEXT_de_DE='<speak>Moin Moin</speak>'
