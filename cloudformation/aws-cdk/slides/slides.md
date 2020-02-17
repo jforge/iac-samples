@@ -89,7 +89,7 @@ Was gibt es bereits für AWS?
 
 * Mit gewohnten Programmiersprachen:
   * Pulumi (multi cloud, polyglott) <!-- .element: class="fragment" -->
-  * Troposhere, Sceptre (Python) <!-- .element: class="fragment" -->
+  * Troposphere, Sceptre (Python) <!-- .element: class="fragment" -->
   * ...? <!-- .element: class="fragment" -->
 * Deklarativ, ohne Programmiersprachen:
   * Cloudformation, Serverless, SAM <!-- .element: class="fragment" -->
@@ -201,7 +201,7 @@ cdk --version
 
 * Aktuelle Sprachbibliotheken und Lifecycle/Dependency Manager
   
-```
+```bash
 mkdir demo && cd demo
 cdk init sample-app language=typescript
 npm install
@@ -276,7 +276,7 @@ Monitor CDK Apps
 
 <!--horizontal_slide-->
 
-## Testing
+## Testing (Jest)
 
 Sample: Jest mit Snapshots
 
@@ -300,12 +300,11 @@ describe('New DynamoDb Resource can be setup', () => {
 
 <!--vertical_slide-->
 
-## Testing
+## Testing (Snapshots)
 
 Sample: Snapshot Test Result
 
 ![snapshot-test](images/aws-cdk-snapshot-test.png)
-
 
 <!--horizontal_slide-->
 

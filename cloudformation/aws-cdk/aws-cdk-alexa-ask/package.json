@@ -11,15 +11,15 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@types/node": "10.17.5",
-    "aws-cdk": "1.23.0",
+    "@types/node": "13.7.1",
+    "aws-cdk": "1.24.0",
     "ts-clean": "^1.0.3",
-    "ts-node": "^8.1.0",
-    "typescript": "~3.7.2"
+    "ts-node": "^8.6.2",
+    "typescript": "~3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/alexa-ask": "^1.23.0",
-    "@aws-cdk/core": "1.23.0",
+    "@aws-cdk/alexa-ask": "^1.24.0",
+    "@aws-cdk/core": "1.24.0",
     "source-map-support": "^0.5.16"
   }
 }

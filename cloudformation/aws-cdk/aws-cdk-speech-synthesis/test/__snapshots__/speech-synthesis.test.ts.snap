@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CDK synthesis result should match the snapshot 1`] = `
+Object {
+  "Outputs": Object {
+    "Bucket": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "SpeechSynthesisBucketA129A21E",
+          "WebsiteURL",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParametersb0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694ArtifactHash71B28BC9": Object {
+      "Description": "Artifact hash for asset \\"b0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694\\"",
+      "Type": "String",
+    },
+    "AssetParametersb0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694S3Bucket0B1DD3EC": Object {
+      "Description": "S3 bucket for asset \\"b0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694\\"",
+      "Type": "String",
+    },
+    "AssetParametersb0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694S3VersionKeyE3223ABC": Object {
+      "Description": "S3 key for asset version \\"b0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "SpeechSynthesisBucketA129A21E": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "BucketName": "speech-synthesis-storage",
+      },
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "SpeechSynthesisBucketPolicy23A82CC8": Object {
+      "Properties": Object {
+        "Bucket": Object {
+          "Ref": "SpeechSynthesisBucketA129A21E",
+        },
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Principal": "*",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "SpeechSynthesisBucketA129A21E",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
+    "SpeechSynthesisTable7D2A3E9A": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "id",
+            "AttributeType": "S",
+          },
+          Object {
+            "AttributeName": "uri",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "id",
+            "KeyType": "HASH",
+          },
+          Object {
+            "AttributeName": "uri",
+            "KeyType": "RANGE",
+          },
+        ],
+        "TableName": "Speech-Synthesis-Data",
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StringParameter472EED0E": Object {
+      "Properties": Object {
+        "Description": "name of the speech synthesis data dynamodb table",
+        "Name": "/DeploymentConfig/dev/SpeechSynthesis/DynamoDB/TableName",
+        "Type": "String",
+        "Value": "Speech-Synthesis-Data",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "speechSynthesisHandlerE421CD4D": Object {
+      "DependsOn": Array [
+        "speechSynthesisHandlerServiceRoleF7B68695",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersb0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694S3Bucket0B1DD3EC",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694S3VersionKeyE3223ABC",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersb0a4edf27fc1f795ff4d4a74842b158686f35bd97665cbd4cbe500938fda5694S3VersionKeyE3223ABC",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "speechSynthesisHandlerServiceRoleF7B68695",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "speechSynthesisHandlerServiceRoleF7B68695": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;
