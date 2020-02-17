@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
+import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
 
-export class SimplifiedInitTemplateStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class SimplifiedInitTemplateStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
   }
 }
 
-const app = new cdk.App();
+const app = new App();
 new SimplifiedInitTemplateStack(app, 'SimplifiedInitTemplateStack');
 
