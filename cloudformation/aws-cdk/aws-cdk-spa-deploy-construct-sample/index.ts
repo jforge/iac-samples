@@ -19,11 +19,20 @@ export class SpaDeployStack extends Stack {
 
     new SPADeploy(this, 'cfDeploy').createSiteWithCloudfront(spaDeployConfig);
 
+    /*
+    HostedZone SPA Deploy throws this:
+     Cannot retrieve value from context provider hosted-zone since account/region
+     are not specified at the stack level. Either configure "env" with explicit
+     account and region when you define your stack, or use the environment variables
+     "CDK_DEFAULT_ACCOUNT" and "CDK_DEFAULT_REGION" to inherit environment information
+     from the CLI (not recommended for production stacks)
+
     new SPADeploy(this, 'spaDeployZoned').createSiteFromHostedZone({
       zoneName: 'lab.00x.de',
       indexDoc: indexDocument,
       websiteFolder: siteContentPath
     });
+    */
 
   }
 }
