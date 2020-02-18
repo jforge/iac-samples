@@ -4,7 +4,12 @@ import { App, Stack } from '@aws-cdk/core';
 import { SpaDeployStack } from './index';
 
 function createTestStack(app: App): Stack {
-  return new SpaDeployStack(app, 'SpaDeployStack');
+  return new SpaDeployStack(app, 'SpaDeployStack', {
+    env: {
+      account: '000000',
+      region: 'us-east-1'
+    }
+  });
 }
 
 describe('Synthesized template can be created', () => {

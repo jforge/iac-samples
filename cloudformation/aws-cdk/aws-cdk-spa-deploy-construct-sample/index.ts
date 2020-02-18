@@ -1,26 +1,28 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
-import { SPADeploy } from 'cdk-spa-deploy';
+import { SPADeploy, SPADeployConfig } from 'cdk-spa-deploy';
 
 export class SpaDeployStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new SPADeploy(this, 'spaDeploy').createBasicSite({
-      indexDoc: 'index.html',
-      websiteFolder: '../blog/dist/blog'
-    });
+    const siteContentPath: string = './assets/site-content';
+    const indexDocument: string = 'index.html';
 
-    new SPADeploy(this, 'cfDeploy').createSiteWithCloudfront({
-      indexDoc: 'index.html',
-      websiteFolder: '../blog/dist/blog'
-    });
+    const spaDeployConfig: SPADeployConfig = {
+      indexDoc: indexDocument,
+      websiteFolder: siteContentPath
+    };
+
+    new SPADeploy(this, 'spaDeploy').createBasicSite(spaDeployConfig);
+
+    new SPADeploy(this, 'cfDeploy').createSiteWithCloudfront(spaDeployConfig);
 
     new SPADeploy(this, 'spaDeployZoned').createSiteFromHostedZone({
       zoneName: 'lab.00x.de',
-      indexDoc: 'index.html',
-      websiteFolder: '../blog/dist/blog'
+      indexDoc: indexDocument,
+      websiteFolder: siteContentPath
     });
 
   }
