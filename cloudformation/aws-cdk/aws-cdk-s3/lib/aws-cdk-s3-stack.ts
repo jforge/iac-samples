@@ -23,7 +23,7 @@ export class AwsCdkS3Stack extends cdk.Stack {
 
     // Deploy site contents to S3 bucket
     new s3deploy.BucketDeployment(this, 'Deploy', {
-      sources: [s3deploy.Source.asset('./site-contents')],
+      sources: [s3deploy.Source.asset('./site-content')],
       destinationBucket: siteBucket
     });
 
