@@ -1,5 +1,5 @@
 ---
-title: AWS Cloud Development Kito
+title: AWS Cloud Development Kit
 author: Klaus Pittig <klaus@pittig.de>
 separator: <!--horizontal_slide-->
 verticalSeparator: <!--vertical_slide-->
