@@ -7,7 +7,7 @@ export class SpaDeployStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const siteContentPath: string = './assets/site-content';
+    const siteContentPath: string = './assets/site-content-1';
     const indexDocument: string = 'index.html';
 
     const spaDeployConfig: SPADeployConfig = {
@@ -17,7 +17,7 @@ export class SpaDeployStack extends Stack {
 
     new SPADeploy(this, 'spaDeploy').createBasicSite(spaDeployConfig);
 
-    new SPADeploy(this, 'cfDeploy').createSiteWithCloudfront(spaDeployConfig);
+    // new SPADeploy(this, 'cfDeploy').createSiteWithCloudfront(spaDeployConfig);
 
     /*
     HostedZone SPA Deploy throws this:
