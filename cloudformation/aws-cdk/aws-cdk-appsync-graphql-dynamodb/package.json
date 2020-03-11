@@ -1,7 +1,6 @@
 {
   "name": "simplified-init-template",
   "version": "1.0.0",
-  "license": "MIT",
   "bin": {
     "simplified-init-template": "index.js"
   },

@@ -1,7 +1,6 @@
 {
   "name": "simplified-init-template",
   "version": "1.0.0",
-  "license": "MIT",
   "bin": {
     "simplified-init-template": "index.js"
   },
@@ -24,6 +23,7 @@
     "typescript": "~3.7.5"
   },
   "dependencies": {
+    "@aws-cdk/aws-iot": "^1.27.0",
     "@aws-cdk/core": "1.27.0",
     "source-map-support": "^0.5.16"
   }
