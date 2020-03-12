@@ -1,8 +1,11 @@
 {
   "name": "simplified-init-template",
   "version": "1.0.0",
+  "license": "MIT",
+  "author": "jforge <github@jforge.de> (https://github.com/jforge)",
+  "private": true,
   "bin": {
-    "simplified-init-template": "index.js"
+    "appsync-graphql-dynamodb": "index.js"
   },
   "scripts": {
     "clean": "ts-clean -e .d.ts,.js,.js.map",

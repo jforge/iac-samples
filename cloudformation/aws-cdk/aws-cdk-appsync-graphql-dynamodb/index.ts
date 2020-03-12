@@ -2,7 +2,7 @@
 import 'source-map-support/register';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
 
-export class SimplifiedInitTemplateStack extends Stack {
+export class AppSyncGraphQlStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -11,5 +11,5 @@ export class SimplifiedInitTemplateStack extends Stack {
 }
 
 const app = new App();
-new SimplifiedInitTemplateStack(app, 'SimplifiedInitTemplateStack');
+new AppSyncGraphQlStack(app, 'AppSyncGraphQlStack');
 

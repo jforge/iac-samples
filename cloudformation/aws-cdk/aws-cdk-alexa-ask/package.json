@@ -1,6 +1,9 @@
 {
   "name": "simplified-init-template",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "jforge <github@jforge.de> (https://github.com/jforge)",
+  "private": true,
   "bin": {
     "simplified-init-template": "index.js"
   },
@@ -12,14 +15,14 @@
   },
   "devDependencies": {
     "@types/node": "13.7.1",
-    "aws-cdk": "1.24.0",
+    "aws-cdk": "1.27.0",
     "ts-clean": "^1.0.3",
     "ts-node": "^8.6.2",
     "typescript": "~3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/alexa-ask": "^1.24.0",
-    "@aws-cdk/core": "1.24.0",
+    "@aws-cdk/alexa-ask": "^1.27.0",
+    "@aws-cdk/core": "1.27.0",
     "source-map-support": "^0.5.16"
   }
 }

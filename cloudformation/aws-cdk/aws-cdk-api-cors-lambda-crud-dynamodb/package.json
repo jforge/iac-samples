@@ -2,6 +2,8 @@
   "name": "api-lambda-crud-dynamodb",
   "version": "1.0.0",
   "description": "Running an API Gateway with Lambdas to do CRUD on DynamoDB",
+  "license": "MIT",
+  "author": "jforge <github@jforge.de> (https://github.com/jforge)",
   "private": true,
   "scripts": {
     "clean": "ts-clean -e .d.ts,.js,.js.map",
@@ -9,16 +11,15 @@
     "watch": "tsc -w",
     "cdk": "cdk"
   },
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^13.5.0",
     "ts-clean": "^1.0.3",
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.22.0",
-    "@aws-cdk/aws-dynamodb": "^1.22.0",
-    "@aws-cdk/aws-lambda": "^1.22.0",
-    "@aws-cdk/core": "^1.22.0"
+    "@aws-cdk/aws-apigateway": "^1.27.0",
+    "@aws-cdk/aws-dynamodb": "^1.27.0",
+    "@aws-cdk/aws-lambda": "^1.27.0",
+    "@aws-cdk/core": "^1.27.0"
   }
 }

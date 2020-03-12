@@ -1,10 +1,10 @@
 
 import { expect as expectCDK, matchTemplate, MatchStyle, haveResource, SynthUtils } from '@aws-cdk/assert';
 import { App, Stack } from '@aws-cdk/core';
-import { SimplifiedInitTemplateStack } from './index';
+import { IotGreengrassStack } from './index';
 
 function createTestStack(app: App): Stack {
-  return new SimplifiedInitTemplateStack(app, 'SimplifiedInitTemplateStack');
+  return new IotGreengrassStack(app, 'IotGreengrassStack');
 }
 
 describe('Synthesized template can be created', () => {

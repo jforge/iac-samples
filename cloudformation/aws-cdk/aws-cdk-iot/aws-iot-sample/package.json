@@ -1,6 +1,9 @@
 {
   "name": "aws-iot-sample",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "jforge <github@jforge.de> (https://github.com/jforge)",
+  "private": true,
   "bin": {
     "aws-iot-sample": "bin/aws-iot-sample.js"
   },
@@ -12,10 +15,10 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.22.0",
+    "@aws-cdk/assert": "^1.27.0",
     "@types/jest": "^25.1.0",
     "@types/node": "13.5.1",
-    "aws-cdk": "^1.22.0",
+    "aws-cdk": "^1.27.0",
     "jest": "^25.1.0",
     "ts-clean": "^1.0.3",
     "ts-jest": "^25.0.0",
@@ -23,8 +26,8 @@
     "typescript": "~3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-iot": "^1.22.0",
-    "@aws-cdk/core": "^1.22.0",
+    "@aws-cdk/aws-iot": "^1.27.0",
+    "@aws-cdk/core": "^1.27.0",
     "source-map-support": "^0.5.16"
   }
 }
