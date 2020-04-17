@@ -12,10 +12,10 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.24.0",
+    "@aws-cdk/assert": "^1.32.2",
     "@types/jest": "^25.1.2",
     "@types/node": "13.7.1",
-    "aws-cdk": "1.24.0",
+    "aws-cdk": "1.32.2",
     "jest": "^25.1.0",
     "ts-clean": "^1.0.3",
     "ts-jest": "^25.2.0",
@@ -23,7 +23,7 @@
     "typescript": "~3.7.5"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.24.0",
+    "@aws-cdk/core": "1.32.2",
     "cdk-spa-deploy": "^0.6.0",
     "source-map-support": "^0.5.16"
   }

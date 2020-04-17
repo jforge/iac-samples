@@ -8,7 +8,7 @@ export class AwsCdkS3Stack extends cdk.Stack {
 
     // Content bucket
     const siteBucket = new s3.Bucket(this, 'SiteBucket', {
-      bucketName: "gcme-static-site-demo",
+      bucketName: "gcme-static-site-demo-" + getRandomInt(10000),
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'index.html',
       publicReadAccess: true,
@@ -28,4 +28,8 @@ export class AwsCdkS3Stack extends cdk.Stack {
     });
 
   }
+}
+
+function getRandomInt(max: number): number {
+  return Math.floor(Math.random() * Math.floor(max));
 }
