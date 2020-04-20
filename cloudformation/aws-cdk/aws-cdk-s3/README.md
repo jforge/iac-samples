@@ -1,6 +1,6 @@
-# Welcome to your CDK TypeScript project!
+# S3 Website Stack
 
-This is a blank project for TypeScript development with CDK.
+CDK Sample for deploying a SPA onto a S3 Bucket.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 

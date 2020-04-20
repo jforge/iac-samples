@@ -1,8 +1,25 @@
-# Welcome to your CDK TypeScript project!
+# EC2 deployment with Custom AMI
 
-This is a blank project for TypeScript development with CDK.
+This sample demonstrates how to deploy an EC2 instance using a custom (windows) AMI.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
+
+## Deployment duration
+
+`cdk deploy` and `cdk destroy` both need about 3 minutes to deploy or to destroy the cloudformation stack
+and respective resources.
+
+## Region agnostic stack
+
+This stack does work, if the stack is not defined as region agnostic by ommitted any specific region setting
+in the Stack Props.
+
+For a custom AMI a region needs to be defined in the StackProps.
+
+## Resources
+
+- [CDK API Docs EC2 Machine Images](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-ec2-readme.html#machine-images-amis)
+
 
 ## Useful commands
 
