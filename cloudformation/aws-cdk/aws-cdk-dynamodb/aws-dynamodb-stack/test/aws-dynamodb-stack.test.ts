@@ -26,7 +26,7 @@ test('KeySchema in Stack', () => {
         "KeyType": "HASH"
       },
       {
-        "AttributeName": "url",
+        "AttributeName": "uri",
         "KeyType": "RANGE"
       }
     ]

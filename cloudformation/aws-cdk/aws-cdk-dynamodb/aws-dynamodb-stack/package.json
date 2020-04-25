@@ -12,21 +12,21 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.22.0",
-    "@types/jest": "^24.9.1",
-    "aws-cdk": "^1.22.0",
-    "jest": "^25.1.0",
-    "ts-jest": "^25.0.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.7.5"
+    "@aws-cdk/assert": "^1.35.0",
+    "@types/jest": "^25.2.1",
+    "aws-cdk": "^1.35.0",
+    "jest": "^25.4.0",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@aws-cdk/aws-dynamodb": "^1.22.0",
-    "@aws-cdk/aws-ssm": "^1.22.0",
-    "@aws-cdk/core": "^1.22.0",
-    "@types/node": "^13.5.0",
-    "aws-sdk": "^2.609.0",
-    "source-map-support": "^0.5.16",
+    "@aws-cdk/aws-dynamodb": "^1.35.0",
+    "@aws-cdk/aws-ssm": "^1.35.0",
+    "@aws-cdk/core": "^1.35.0",
+    "@types/node": "^13.13.2",
+    "aws-sdk": "^2.663.0",
+    "source-map-support": "^0.5.19",
     "ts-clean": "^1.0.3"
   }
 }

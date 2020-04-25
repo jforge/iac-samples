@@ -12,7 +12,7 @@ export class AwsDynamodbStack extends Stack {
       partitionKey: { name: 'host', type: AttributeType.STRING },
       sortKey: { name: 'uri', type: AttributeType.STRING },
       billingMode: BillingMode.PAY_PER_REQUEST,
-      removalPolicy: RemovalPolicy.DESTROY,
+      removalPolicy: RemovalPolicy.RETAIN,
       tableName: tableName
     };
 

@@ -7,7 +7,7 @@ test('Empty Stack', () => {
     // WHEN
     const stack = new AwsIotSample.AwsIotSampleStack(app, 'MyTestStack');
     // THEN
-    expectCDK(stack).to(matchTemplate({
+    expectCDK(stack).notTo(matchTemplate({
       "Resources": {}
     }, MatchStyle.EXACT))
 });

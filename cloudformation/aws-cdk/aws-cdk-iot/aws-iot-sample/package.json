@@ -15,19 +15,19 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.27.0",
-    "@types/jest": "^25.1.0",
+    "@aws-cdk/assert": "^1.35.0",
+    "@types/jest": "^25.2.1",
     "@types/node": "13.5.1",
-    "aws-cdk": "^1.27.0",
-    "jest": "^25.1.0",
+    "aws-cdk": "^1.35.0",
+    "jest": "^25.4.0",
     "ts-clean": "^1.0.3",
-    "ts-jest": "^25.0.0",
-    "ts-node": "^8.6.2",
-    "typescript": "~3.7.5"
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@aws-cdk/aws-iot": "^1.27.0",
-    "@aws-cdk/core": "^1.27.0",
+    "@aws-cdk/aws-iot": "^1.35.0",
+    "@aws-cdk/core": "^1.35.0",
     "source-map-support": "^0.5.16"
   }
 }
