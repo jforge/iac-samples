@@ -2,6 +2,20 @@
 
 Demonstrates provisioning of Route53 Zone resources together with a Cloudfront distribution.
 
+## CDK synth with Route53
+
+Using `cdk synth` causes the stack to be matched with remote resources for the selected AWS profile,
+if using some lookup function like `HostedZone.fromLookup` to determine a Zone instance.
+   
+Synthesis then throws an error, if the referenced Route53 zone does not exist on the remote AWS account.
+
+```
+[Error at /StaticSiteStack] Found zones: [] for dns:abc.example.org., privateZone:undefined, vpcId:undefined, but wanted exactly 1 zone
+Found errors
+```
+
+To avoid this, choose the respective profile: `cdk synth --profile <profile_name_of_account_managing_the_route53_zone>`
+
 ## Useful commands
 
  * `npm run build`   compile typescript to js
@@ -13,4 +27,4 @@ Demonstrates provisioning of Route53 Zone resources together with a Cloudfront d
 
 ## References
 
-[Route53 CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-route53-readme.html)
+- [Route53 CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-route53-readme.html)

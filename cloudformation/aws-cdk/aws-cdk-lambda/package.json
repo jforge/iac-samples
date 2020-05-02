@@ -16,15 +16,15 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/node": "^13.7.0",
+    "@types/node": "^13.13.4",
     "ts-clean": "^1.0.3",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.7.5"
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@aws-cdk/aws-events": "*",
-    "@aws-cdk/aws-events-targets": "*",
-    "@aws-cdk/aws-lambda": "*",
-    "@aws-cdk/core": "*"
+    "@aws-cdk/aws-events": "^1.36.1",
+    "@aws-cdk/aws-events-targets": "^1.36.1",
+    "@aws-cdk/aws-lambda": "^1.36.1",
+    "@aws-cdk/core": "^1.36.1"
   }
 }
