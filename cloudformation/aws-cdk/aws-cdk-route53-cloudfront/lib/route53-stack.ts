@@ -9,7 +9,6 @@ import { BucketStack } from "./s3-stack";
 import MultiStackProps from './config/combined-stack-properties';
 import ZoneUtils from "./util/zone-utils";
 import { BucketDeploymentProps } from "@aws-cdk/aws-s3-deployment/lib/bucket-deployment";
-import { SourceConfiguration } from "@aws-cdk/aws-cloudfront/lib/web_distribution";
 
 export class Route53MultiStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: MultiStackProps) {

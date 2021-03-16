@@ -33,7 +33,7 @@ const app = new cdk.App();
 const environments = [
   { account: '12345678', region: 'us-east-1' },
   { account: '87654321', region: 'eu-west-1' },
-  { account: '12344321', region: 'eu-centralk-1' },
+  { account: '12344321', region: 'eu-central-1' },
 ];
 
 // Beta instance in the first environment
