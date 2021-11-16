@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.575.0",
+    "aws-sdk": "^2.814.0",
     "copy-dynamodb-table": "^2.0.17",
     "js-yaml": "^3.13.1"
   },
