@@ -25,7 +25,7 @@
     "@aws-cdk/aws-ssm": "^1.35.0",
     "@aws-cdk/core": "^1.35.0",
     "@types/node": "^13.13.2",
-    "aws-sdk": "^2.663.0",
+    "aws-sdk": "^2.814.0",
     "source-map-support": "^0.5.19",
     "ts-clean": "^1.0.3"
   }
