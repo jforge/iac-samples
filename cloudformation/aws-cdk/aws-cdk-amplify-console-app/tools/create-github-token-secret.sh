@@ -7,7 +7,7 @@
 
 # aws secretsmanager put-secret-value --secret-id production/GitHubAccessToken --secret-string '...'
 
-aws secretsmanager create-secret --name production/GitHubAccessToken --secret-string '<your-github-personal-acccess-token-value>'
+aws secretsmanager create-secret --name production/GitHubAccessToken --secret-string '<your-github-personal-access-token-value>'
 
 aws secretsmanager list-secrets
 

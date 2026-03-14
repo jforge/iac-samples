@@ -1,5 +1,18 @@
 # Infrastructure as Code samples
 
+First, these are *examples*. It's not production ready.
+The point of this repository is to demonstrate some features available with
+Infrastructure as Code solutions like AWS CDK, Pulumi and the like.
+
+The primary work currently happens with the AWS CDK,
+then other preferences of the contributors.
+
+The examples make many assumptions in order to keep the solutions easy to follow
+and to show the value of the respective approach from different perspectives.
+
+**If you choose to run the examples you are responsible for any cloud provider costs
+that  are incurred. Default values may or may not be designed to be cost conscious.**
+
 ## Infrastructure is/with Code
 
 Some notes about "coding" infrastructure instead of using markup-like yaml, json or low-level 

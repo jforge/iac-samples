@@ -1,20 +1,27 @@
 # The AWS Cloud Development Kit
 
-Infrastructure as Code tool samples with some focus on deployment of Cloudfront, Lambda@edge functions, Route53, ACM, S3 and DynamoDB AWS services.
+Infrastructure as Code samples with focus on deployment of Cloudfront,
+Lambda@edge functions, Route53, ACM, S3 and DynamoDB AWS services.
 
 The AWS Cloud Development Kit is developed in Typescript which is transpiled to JavaScript.
 
-There are bindings for other programming languages to produce Cloudformation deployments: https://docs.aws.amazon.com/de_de/cdk/latest/guide/getting_started.html
+There are bindings for other programming languages to produce Cloudformation deployments:
+https://docs.aws.amazon.com/de_de/cdk/latest/guide/getting_started.html
 
 Starter recommendation: [CDK Workshop](https://cdkworkshop.com/)
 
 ## Techradar
 
-Thoughtworks technology radar tags Handwritten Cloudformation descriptors with HOLD: https://www.thoughtworks.com/radar/tools/handwritten-cloudformation
+Thoughtworks technology radar tags Handwritten Cloudformation descriptors with HOLD:
+https://www.thoughtworks.com/radar/tools/handwritten-cloudformation
 
-Reasons can be acceded, let's use regular programming languages and test suites to produce Cloudformation stacks for deploying AWS infrastructure.
+Reasons can be acceded, let's use regular programming languages and test suites to produce 
+Cloudformation stacks for deploying AWS infrastructure.
 
-One proposal is to use the original [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) for Cloudformation Template production in order not to immediately adopt new high level frameworks like [troposphere](https://www.thoughtworks.com/radar/languages-and-frameworks/troposphere) (Thoughtworks ASSESS) or [Pulumi](https://www.thoughtworks.com/radar/platforms/pulumi) (Thoughtworks ASSESS).
+One proposal is to use the original [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) 
+for Cloudformation Template production in order not to immediately adopt new high level frameworks 
+like [troposphere](https://www.thoughtworks.com/radar/languages-and-frameworks/troposphere) (Thoughtworks ASSESS) 
+or [Pulumi](https://www.thoughtworks.com/radar/platforms/pulumi) (Thoughtworks ASSESS).
 
 ## AWS CDK CLI Setup
 
@@ -33,7 +40,7 @@ cdk init sample-app --language=typescript
 
 ## SimpleStack Demo
 
-First of all: have an AWS account, aws-cli and configure your local system appropriately (aws configure).
+First: have an AWS account, aws-cli and configure your local system appropriately (aws configure).
 
 Switch your NVM environment to Node.js v10.16.3 (LTS: Dubnium).
 
@@ -87,7 +94,7 @@ Be aware that you need createRole and passRole right to produce this stack
 
 See above.
 
-## DynamDB Demo
+## DynamoDB Demo
 
 See above.
 
@@ -105,14 +112,14 @@ are realized using [Jest](https://jestjs.io/).
 Integration Tests with (partly) local server resources can be realized
 with different tools, manually or even with Jest support, like [Jest DynamoDB](https://github.com/shelfio/jest-dynamodb).
 
-The particular resources we can start realistic enviroments for are currently:
+The particular resources we can start realistic environments for are currently:
 
-- DyanmoDB
+- DynamoDB
 - Lambda Functions
 
 ### DynamoDB integration tests
 
-Start a local DyanmoDB environment (e.g. in a Docker Container) and use
+Start a local DynamoDB environment (e.g. in a Docker Container) and use
 [Jest DynamoDB](https://github.com/shelfio/jest-dynamodb) for integration tests.
 
 ### Lambda Function integration tests
